@@ -1,6 +1,6 @@
 <script>
     import { Chart, Card, A, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
-    import { ChevronRightSolid, ChevronDownSolid } from 'flowbite-svelte-icons';
+    import { ChevronRightSolid, ChevronDownSolid, ChevronUpSolid } from 'flowbite-svelte-icons';
 
     export let name = 'Power Level';
     export let status = '12.1V';
@@ -82,7 +82,11 @@
       </div>
       <div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-red-500 dark:text-red-500 text-center">
         {lastDelta}
-        <ChevronDownSolid class="w-3 h-3 ml-1" />
+        {#if lastDelta.includes('-')}
+          <ChevronDownSolid class="w-3 h-3 ml-1" />
+        {:else}
+          <ChevronUpSolid class="w-3 h-3 ml-1" />
+        {/if}
       </div>
     </div>
     <Chart {options} />

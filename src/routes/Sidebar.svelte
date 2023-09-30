@@ -33,7 +33,7 @@
                 </svelte:fragment>
                 <SidebarDropdownItem label="Rover" href="/rover" active={activeUrl == "/rover"}>
                 </SidebarDropdownItem>
-                <SidebarDropdownItem label="Astroanut" />
+                <SidebarDropdownItem label="Astroanut" href="/astronaut" active={activeUrl == "/astronaut"}/>
             </SidebarDropdownWrapper>
             <SidebarItem
                 label="Map"

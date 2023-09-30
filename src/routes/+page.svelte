@@ -10,7 +10,9 @@
 </svelte:head>
 
 <section>
-	<Counter/>
+	<div class="justify-center pr-72">
+		<h1 class="text-3xl dark:text-white">TODO</h1>
+	</div>
 </section>
 
 <style>
