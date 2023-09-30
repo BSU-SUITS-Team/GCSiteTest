@@ -1,20 +1,51 @@
 import { writable } from 'svelte/store';
 
+// This has a dataformat of:
+// {
+//     roverName: [
+//         [elementKey, element],
+//         [elementKey, element],
+//         ...
+//     ],
+//     roverName: [
+//         [elementKey, element],
+//         [elementKey, element],
+//         ...
+//     ],
+//     ...
+// }
 const initialKeepables = {};
+// This has a dataformat of:
+// {
+//     roverName: {
+//         graphName: {
+//             data: [y1, y2, y3, ...],
+//             },
+//         },
+//         graphName: {
+//             data: [y1, y2, y3, ...],
+//             }
+//         },
+//     },
+//     roverName: {
+//         graphName: {
+//             data: [y1, y2, y3, ...],
+//             }
+//         },
+//         graphName: {
+//             data: [y1, y2, y3, ...],
+//             }
+//         },
+//     },
+//     ...
+// }
+const initialGraphs = {};
 
 function createKeepablesStore() {
     const { subscribe, set, update } = writable(initialKeepables);
 
     return {
         subscribe,
-        addRover: (name, data) => update(n => { 
-            return { ...n, [name]: data }; 
-        }),
-        removeRover: (name) => update(n => {
-            let updated = { ...n };
-            delete updated[name];
-            return updated;
-        }),
         removeElement: (roverName, elementKey) => update(n => {
             if (n[roverName]) {
                 n[roverName] = n[roverName].filter(([key]) => key !== elementKey);
@@ -39,4 +70,32 @@ function createKeepablesStore() {
     };
 }
 
+function createGraphsStore() {
+    const { subscribe, set, update } = writable(initialGraphs);
+
+    return {
+        subscribe,
+        addGraph: (roverName, graphName, data) => update(n => {
+            console.log('addGraph', roverName, graphName, data);
+            if (!n[roverName]) {
+                n[roverName] = {};
+            }
+            n[roverName][graphName] = data;
+            return { ...n };
+        }),
+        removeGraph: (roverName, graphName) => update(n => {
+            if (n[roverName]) {
+                delete n[roverName][graphName];
+            }
+            // if empty, remove rover
+            if (Object.keys(n[roverName]).length === 0) {
+                delete n[roverName];
+            }
+            return { ...n };
+        }),
+    };
+}
+
+
 export const keepables = createKeepablesStore();
+export const graphdata = createGraphsStore();

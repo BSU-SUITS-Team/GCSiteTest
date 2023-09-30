@@ -1,7 +1,7 @@
 <script>
 	import { Heading, Span, Button } from 'flowbite-svelte';
 	import Graph from '../graph.svelte';
-	import { keepables } from '../store';
+	import { keepables, graphdata } from '../store';
 
 	let data = [
 		['Battery:', '72%'],
@@ -10,6 +10,33 @@
 		['Heart Rate', '72bpm'],
 		['CO2', '0.04%'],
 		['Temperature', '20C']
+	];
+
+	const graphs = [
+		{
+			graphdata: [14.1, 13.9, 13.8, 13.7, 12.7, 12.3],
+			lastDelta: '-12.3%',
+			name: "Battery",
+			status: "12.3V"
+		},
+		{
+			graphdata: [98.4, 97.3, 97, 96.5, 96, 96],
+			lastDelta: '-1.7%',
+			name: 'Oxygen Level',
+			status: '96%'
+		},
+		{
+			graphdata: [72, 72, 73, 74, 73, 72],
+			lastDelta: '-1bpm',
+			name: 'Heart Rate',
+			status: '72bpm'
+		},
+		{
+			graphdata: [0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
+			lastDelta: '0.01%',
+			name: 'CO2 Level',
+			status: '0.04%'
+		}
 	];
 </script>
 
@@ -50,32 +77,10 @@
 	<Heading tag="h3">Details</Heading>
 	<br />
 	<div class="flex flex-row flex-wrap">
-		<div class="w-96 p-2">
-			<Graph graphdata={[14.1, 13.9, 13.8, 13.7, 12.7, 12.3]} lastDelta="-12.3%"/>
-		</div>
-		<div class="w-96 p-2">
-			<Graph
-				graphdata={[98.4, 97.3, 97, 96.5, 96, 96]}
-				lastDelta="-1.7%"
-				name="Oxygen Level"
-				status="96%"
-			/>
-		</div>
-		<div class="w-96 p-2">
-			<Graph
-				graphdata={[72, 72, 73, 74, 73, 72]}
-				lastDelta="-1bpm"
-				name="Heart Rate"
-				status="72bpm"
-			/>
-		</div>
-		<div class="w-96 p-2">
-			<Graph
-				graphdata={[0.04, 0.04, 0.04, 0.04, 0.04, 0.04]}
-				lastDelta="0.01%"
-				name="CO2 Level"
-				status="0.04%"
-			/>
-		</div>
+		{#each graphs as graph}
+			<button class="w-96 p-2" on:click={() => graphdata.addGraph("ASTRONAUT", graph.name, graph.graphdata)}>
+				<Graph {...graph}/>
+			</button>
+		{/each}
 	</div>
 </div>
