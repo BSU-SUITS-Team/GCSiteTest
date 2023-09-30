@@ -5,7 +5,7 @@
 </script>
 
 <div class="app h-screen dark:bg-gray-900">
-	<aside class="flex-grow-0 flex-shrink-0 w-fit h-full flex-col justify-between flex dark:bg-gray-800 border-x-2">
+	<aside class="flex-grow-0 flex-shrink-0 w-fit h-full flex-col justify-between flex dark:bg-gray-800 border-r-2 dark:border-gray-700">
 		<span class="p-8 text-center">
 			<Heading tag="h1">
 				ARSIS
