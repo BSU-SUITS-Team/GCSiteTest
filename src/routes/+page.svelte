@@ -10,7 +10,7 @@
 </svelte:head>
 
 <section>
-
+	<Counter/>
 </section>
 
 <style>
