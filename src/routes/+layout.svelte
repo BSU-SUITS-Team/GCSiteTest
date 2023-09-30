@@ -32,7 +32,7 @@
 
 	<div class="absolute right-0 h-full p-8 bg-white dark:bg-gray-900 overflow-y-auto" style="width: 22rem;">
 		{#each new Set([...Object.keys($keepables), ...Object.keys($graphdata)]) as label}
-			<div class="border-b flex-row flex pb-2 mb-1">
+			<div class="border-b flex-row flex pb-2 mb-1 dark:border-gray-700">
 				<Heading tag="h4">{label}</Heading>
 				<FileEditSolid class="dark:text-gray-400 mr-2 h-7 text-gray-800" href="/rover" />
 				<TrashBinOutline class="dark:text-gray-400 h-7 text-gray-800" />

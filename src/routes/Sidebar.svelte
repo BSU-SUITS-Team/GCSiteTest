@@ -37,7 +37,6 @@
             </SidebarDropdownWrapper>
             <SidebarItem
                 label="Map"
-                href="/map"
             >
                 <svelte:fragment slot="icon">
                     <MapPinAltSolid
