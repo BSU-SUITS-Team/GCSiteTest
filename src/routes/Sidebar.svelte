@@ -11,7 +11,8 @@
         MapPinAltSolid,
         UserGroupSolid,
         ExclamationCircleSolid,
-        QuestionCircleSolid
+        QuestionCircleSolid,
+		TabletSolid
 	} from 'flowbite-svelte-icons';
 	let spanClass = 'flex-1 ml-3 whitespace-nowrap';
 	$: activeUrl = $page.url.pathname;
@@ -65,6 +66,13 @@
 					/>
 				</svelte:fragment>
 			</SidebarItem> -->
+			<SidebarItem label="Rover Controller Test" href="/Rovercontroltest">
+				<svelte:fragment slot="icon">
+					<TabletSolid
+						class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+					/>
+				</svelte:fragment>
+			</SidebarItem>
 		</SidebarGroup>
 	</SidebarWrapper>
 </Sidebar>
