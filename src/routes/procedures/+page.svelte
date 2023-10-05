@@ -2,14 +2,12 @@
 	import { Breadcrumb, BreadcrumbItem, Heading, Span } from 'flowbite-svelte';
 	import { Timeline, TimelineItem, Button, Card } from 'flowbite-svelte';
 	import { ArrowRightOutline, PlusSolid } from 'flowbite-svelte-icons';
-	export let data;
 </script>
 
 <div class="w-fit h-fit m-4">
 	<Breadcrumb solid>
 		<BreadcrumbItem href="/" home>Home</BreadcrumbItem>
-		<BreadcrumbItem href="/">Projects</BreadcrumbItem>
-		<BreadcrumbItem>Flowbite Svelte</BreadcrumbItem>
+		<BreadcrumbItem href="/">TestProcedure</BreadcrumbItem>
 	</Breadcrumb>
 	<Card>
 		<Heading tag="h2" class="mb-3">Procedure Name</Heading>
