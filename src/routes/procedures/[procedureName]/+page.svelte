@@ -1,6 +1,6 @@
 <script>
 	import { Breadcrumb, BreadcrumbItem, Heading, Span } from 'flowbite-svelte';
-	import Procedure from './procedure.svelte';
+	import Procedure from './Procedure.svelte';
 
     /** @type {import('./$types').PageData} */
     export let data;
