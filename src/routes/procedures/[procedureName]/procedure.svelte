@@ -30,32 +30,29 @@
     let allSteps = [
         {
             title: "Install Jetpack",
-            date: "Step 1",
             description: "Update all of the procedure here to see what can be done to improve the expereince of the",
-            links: ["Battery &lt 20%", "Oxygen &gt 50%"]
+            links: ["Battery < 20%", "Oxygen > 50%"]
         },
         {
-            title: "Install Jetpack",
-            date: "Step 1",
+            title: "Launch Missiles",
             description: "Update all of the procedure here to see what can be done to improve the expereince of the"
         },
         {
-            title: "Install Jetpack",
-            date: "Step 1",
+            title: "Propare Tofu",
             description: "Update all of the procedure here to see what can be done to improve the expereince of the",
             substeps: [
                 {
-                    title: "Install Jetpack",
+                    title: "Boil Water",
                     date: "Step 1",
                     description: "Update all of the procedure here to see what can be done to improve the expereince of the"
                 },
                 {
-                    title: "Install Jetpack",
+                    title: "[REDACTED]",
                     date: "Step 1",
-                    description: "Update all of the procedure here to see what can be done to improve the expereince of the"
+                    description: "[REDACTED]"
                 },
                 {
-                    title: "Install Jetpack",
+                    title: "Serve",
                     date: "Step 1",
                     description: "Update all of the procedure here to see what can be done to improve the expereince of the"
                 }
@@ -67,25 +64,8 @@
 <Card>
 	<Heading tag="h2" class="mb-3">{name}</Heading>
 	<Timeline>
-		<!-- <TimelineItem title="Install Jetpack" date="Step 1">
-			<p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-				Update all of the procedure here to see what can be done to improve the expereince of the <span
-					class="text-primary-700">test</span
-				>
-			</p>
-			<Button color="alternative">Battery &lt 20%</Button>
-			<Button color="alternative">Oxygen &gt 50%</Button>
-			<Button color="alternative">New Condition<PlusSolid class="w-3 h-3 ml-2" /></Button>
-		</TimelineItem>
-		<TimelineItem title="Launch Missiles" date="Step 2">
-			<p class="text-base font-normal text-gray-500 dark:text-gray-400 mb-4">
-				Here is another test
-			</p>
-			<Button color="alternative">New Condition<PlusSolid class="w-3 h-3 ml-2" /></Button>
-		</TimelineItem>
-		<ProcedureStep {...testProceduralProcedure} /> -->
         {#each allSteps as step}
-            <ProcedureStep {...step} />
+            <ProcedureStep {...step} date="Step {allSteps.indexOf(step) + 1}" />
         {/each}
 	</Timeline>
 </Card>
