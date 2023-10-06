@@ -31,24 +31,24 @@
 		{
 			title: 'Install Jetpack',
 			description:
-				'Update all of the procedure here to see what can be done to improve the expereince of the',
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
 			links: ['Battery < 20%', 'Oxygen > 50%']
 		},
 		{
 			title: 'Launch Missiles',
 			description:
-				'Update all of the procedure here to see what can be done to improve the expereince of the'
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
 		},
 		{
 			title: 'Propare Tofu',
 			description:
-				'Update all of the procedure here to see what can be done to improve the expereince of the',
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
 			substeps: [
 				{
 					title: 'Boil Water',
 					date: 'Step 1',
 					description:
-						'Update all of the procedure here to see what can be done to improve the expereince of the'
+						'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation'
 				},
 				{
 					title: '[REDACTED]',
@@ -59,7 +59,7 @@
 					title: 'Serve',
 					date: 'Step 1',
 					description:
-						'Update all of the procedure here to see what can be done to improve the expereince of the'
+						'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation'
 				}
 			]
 		}

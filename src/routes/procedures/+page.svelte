@@ -1,8 +1,20 @@
 <script>
-	import { Breadcrumb, BreadcrumbItem, Heading, Span } from 'flowbite-svelte';
+	import {
+		Breadcrumb,
+		BreadcrumbItem,
+		Heading,
+		Span,
+		Table,
+		TableHead,
+		TableHeadCell,
+		TableBody,
+		TableBodyRow,
+		TableBodyCell,
+		TableSearch
+	} from 'flowbite-svelte';
 	import { Timeline, TimelineItem, Button, Card } from 'flowbite-svelte';
 	import { ArrowRightOutline, PlusSolid } from 'flowbite-svelte-icons';
-
+	let searchTerm = '';
 	let prodecureNames = [
 		'Test Procedure 1',
 		'How to make a sandwich',
@@ -11,17 +23,35 @@
 		'Do EVA',
 		'Test Procedure 5'
 	];
+	$: filteredItems = prodecureNames.filter(
+		(item) => item.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+	);
 </script>
 
-<div class="w-fit h-fit m-4">
-	<Breadcrumb solid class="mb-4">
+<div class="w-auto h-fit m-4 mr-24">
+	<Breadcrumb class="mb-4">
 		<BreadcrumbItem href="/" home>Home</BreadcrumbItem>
 		<BreadcrumbItem href="/procedures">Procedures</BreadcrumbItem>
 	</Breadcrumb>
-	<Heading tag="h2" class="mb-3">Procedures</Heading>
-	<div class="flex flex-row flex-wrap">
-		{#each prodecureNames as prcedure}
-			<Button href="/procedures/{prcedure}" class="m-1 flex" color="alternative">{prcedure}</Button>
-		{/each}
-	</div>
+	<Heading tag="h2" class="mb-4">Procedures</Heading>
+	<TableSearch hoverable bind:inputValue={searchTerm}>
+		<TableHead>
+			<TableHeadCell>Procedure Name</TableHeadCell>
+			<TableHeadCell>Category</TableHeadCell>
+			<TableHeadCell>Duration</TableHeadCell>
+		</TableHead>
+		<TableBody class="divide-y">
+			{#each filteredItems as prcedure}
+				<TableBodyRow>
+					<TableBodyCell>
+						<a href="/procedures/{prcedure}" class="flex">
+							{prcedure}
+						</a></TableBodyCell
+					>
+					<TableBodyCell>Test Procedures</TableBodyCell>
+					<TableBodyCell>-</TableBodyCell>
+				</TableBodyRow>
+			{/each}
+		</TableBody>
+	</TableSearch>
 </div>

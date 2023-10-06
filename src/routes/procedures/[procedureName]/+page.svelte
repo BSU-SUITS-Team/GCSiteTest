@@ -6,8 +6,8 @@
     export let data;
 </script>
 
-<div class="w-fit h-fit m-4">
-	<Breadcrumb solid class="mb-4">
+<div class="w-auto h-fit m-4 mr-24">
+	<Breadcrumb class="mb-4">
 		<BreadcrumbItem href="/" home>Home</BreadcrumbItem>
 		<BreadcrumbItem href="/procedures">Procedures</BreadcrumbItem>
 		<BreadcrumbItem href="/procedures/{data.name}">{data.name}</BreadcrumbItem>
