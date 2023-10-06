@@ -1,7 +1,8 @@
 <script>
-	import { Heading, Span, Button } from 'flowbite-svelte';
+	import { Heading, Span, Button, Spinner } from 'flowbite-svelte';
 	import Graph from '../graph.svelte';
 	import { keepables, graphdata } from '../store';
+	import EmptyVideo from '../EmptyVideo.svelte';
 
 	let data = [
 		['Battery 1:', '72%'],
@@ -60,6 +61,18 @@
 	<Button>Self Destruct</Button>
 	<br />
 	<br />
+	<Heading tag="h3">Cameras</Heading>
+	<br />
+	<div class="flex flex-row">
+		<div class="p-2">
+			<EmptyVideo name="Main Camera"/>
+		</div>
+		<div class="p-2">
+			<EmptyVideo name="Realsense Camera "/>
+		</div>
+	</div>
+	<br />
+	<br />
 	<Heading tag="h3">Details</Heading>
 	<br />
 	<div class="flex flex-row flex-wrap">
@@ -69,4 +82,5 @@
 			</button>
 		{/each}
 	</div>
+	
 </div>
