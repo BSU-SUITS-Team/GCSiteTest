@@ -17,12 +17,13 @@
 	{#if edit}
 		<Textarea
 			class="text-base font-normal text-gray-500 dark:text-gray-400 mb-2"
-			value={description}
+			bind:value={description}
 			rows="5"
 		>
 			{description}
 		</Textarea>
-		<Button class="mb-2" on:click={() => (edit = !edit)}>Save</Button>
+		<Button class="mb-2" on:click={() => (edit = !edit)}>Save</Button>        
+		<Button class="mb-2" color="alternative" on:click={() => (edit = !edit)}>Cancel</Button>
 		<br />
 	{:else}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -44,12 +45,13 @@
                     {#if substepedits[substeps.indexOf(substep)]}
                         <Textarea
                             class="text-base font-normal text-gray-500 dark:text-gray-400 mb-2"
-                            value={substep.description}
+                            bind:value={substep.description}
                             rows="5"
                         >
                             {substep.description}
                         </Textarea>
                         <Button class="mb-2" on:click={() => (substepedits[substeps.indexOf(substep)] = !substepedits[substeps.indexOf(substep)])}>Save</Button>
+                        <Button class="mb-2" color="alternative" on:click={() => (substepedits[substeps.indexOf(substep)] = !substepedits[substeps.indexOf(substep)])}>Cancel</Button>
                         <br />
                     {:else}
                         <!-- svelte-ignore a11y-click-events-have-key-events -->
