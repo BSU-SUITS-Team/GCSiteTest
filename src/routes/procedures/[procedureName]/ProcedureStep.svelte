@@ -6,6 +6,7 @@
 	export let date;
 	export let description;
 	export let links = [];
+	export let problemLinks = [];
 
 	export let substeps = [];
 
@@ -67,8 +68,14 @@
 			{/each}
 		</Timeline>
 	{/if}
+	{#each problemLinks as link}
+		<Button class="m-1">{link}</Button>
+	{/each}
 	{#each links as link}
 		<Button color="alternative" class="m-1">{link}</Button>
 	{/each}
+	
+	<br>
 	<Button color="alternative" class="m-1">New Condition<PlusSolid class="w-3 h-3 ml-2" /></Button>
+	<Button color="alternative" class="m-1">Problem<PlusSolid class="w-3 h-3 ml-2" /></Button>
 </TimelineItem>
