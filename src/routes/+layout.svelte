@@ -2,11 +2,36 @@
 	import '../app.postcss';
 	import Sidebar from './Sidebar.svelte';
 	import { spring } from 'svelte/motion';
+	import { slide } from 'svelte/transition';
 	import { graphdata, keepables } from './store.js';
-	import { Heading, DarkMode, Button, Span } from 'flowbite-svelte';
-	import { TrashBinOutline, FileEditSolid } from 'flowbite-svelte-icons';
+	import { Heading, DarkMode, Button, Span, Toast } from 'flowbite-svelte';
+	import {
+		TrashBinOutline,
+		FileEditSolid,
+		CheckCircleSolid,
+		ExclamationCircleOutline
+	} from 'flowbite-svelte-icons';
 	import Graph from './graph.svelte';
 	import TinyGraph from './TinyGraph.svelte';
+
+	let hasNotification = false;
+	let notificationText = "Oxygen Tank Has Exploaded"
+
+	let notificationList = []
+
+	function notify(text) {
+		notificationList.push(text)
+		notificationText = text
+		hasNotification = true
+		setTimeout(() => {
+			notificationList.shift()
+			if (notificationList.length > 0) {
+				notificationText = notificationList[0]
+			} else {
+				hasNotification = false
+			}
+		}, 15000)
+	}
 </script>
 
 <div class="app h-screen dark:bg-gray-900 flex overflow-hidden">
@@ -27,10 +52,19 @@
 	</aside>
 
 	<main class="flex flex-col flex-1 ml-72 overflow-y-auto mr-72">
-		<slot />
+		<div class="absolute right-5 top-5 z-50">
+			<Toast transition={slide} open={hasNotification}>
+				<ExclamationCircleOutline slot="icon" class="w-5 h-5" />
+				{notificationText}
+			</Toast>
+		</div>
+		<slot {notify}></slot>
 	</main>
 
-	<div class="absolute right-0 h-full p-8 bg-white dark:bg-gray-900 overflow-y-auto" style="width: 22rem;">
+	<div
+		class="absolute right-0 h-full p-8 bg-white dark:bg-gray-900 overflow-y-auto"
+		style="width: 22rem;"
+	>
 		{#each new Set([...Object.keys($keepables), ...Object.keys($graphdata)]) as label}
 			<div class="border-b flex-row flex pb-2 mb-1 dark:border-gray-700">
 				<Heading tag="h4">{label}</Heading>

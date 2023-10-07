@@ -2,16 +2,24 @@
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import { Button } from 'flowbite-svelte';
+
+
+	export let notify;
+
+	function doNotify() {
+		notify("aaaaahhhhhhhhhh");
+	}
 </script>
 
 <svelte:head>
 	<title>Home Page</title>
-	<meta name="description" content="ARSIS ground station" />
+	<meta name="description" content="ARSIS ground station"/>
 </svelte:head>
 
 <section>
 	<div class="justify-center pr-72">
-		<h1 class="text-3xl dark:text-white">TODO</h1>
+		<Button on:click={doNotify}>test</Button>
 	</div>
 </section>
 
