@@ -3,12 +3,10 @@
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 	import { Button } from 'flowbite-svelte';
-
-
-	export let notify;
+	import {notifications} from './store.js'
 
 	function doNotify() {
-		notify("aaaaahhhhhhhhhh");
+		notifications.addNotification("Oxygen Tank Has Exploaded", "error", 300)
 	}
 </script>
 

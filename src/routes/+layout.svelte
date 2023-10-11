@@ -3,7 +3,7 @@
 	import Sidebar from './Sidebar.svelte';
 	import { spring } from 'svelte/motion';
 	import { slide } from 'svelte/transition';
-	import { graphdata, keepables } from './store.js';
+	import { graphdata, keepables, notifications } from './store.js';
 	import { Heading, DarkMode, Button, Span, Toast } from 'flowbite-svelte';
 	import {
 		TrashBinOutline,
@@ -53,12 +53,14 @@
 
 	<main class="flex flex-col flex-1 ml-72 overflow-y-auto mr-72">
 		<div class="absolute right-5 top-5 z-50">
+			{#each notifications as notification}
 			<Toast transition={slide} open={hasNotification}>
 				<ExclamationCircleOutline slot="icon" class="w-5 h-5" />
-				{notificationText}
+				{notification["message"]}
 			</Toast>
+			{/each}
 		</div>
-		<slot {notify}></slot>
+		<slot></slot>
 	</main>
 
 	<div
