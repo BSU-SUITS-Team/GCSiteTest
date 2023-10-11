@@ -15,17 +15,17 @@
 			name: 'John Doe',
 			oxygen: 99,
 			battery: 100,
-			co2: 0,
-			heartRate: 99,
+			co2: 178,
+			heartRate: 0,
 			temperature: 99,
 			location: 'Mars',
 			fanSpeed: 68
 		},
 		{
 			name: 'Jane Doe',
-			oxygen: 100,
+			oxygen: 70,
 			battery: 100,
-			co2: 0,
+			co2: 178,
 			heartRate: 100,
 			temperature: 4,
 			location: 'Mars',
@@ -33,20 +33,20 @@
 		},
 		{
 			name: 'John Doe',
-			oxygen: 100,
+			oxygen: 30,
 			battery: 100,
-			co2: 0,
-			heartRate: 100,
+			co2: 178,
+			heartRate: 110,
 			temperature: 98,
 			location: 'Mars',
 			fanSpeed: 77
 		},
 		{
 			name: 'Jane Doe',
-			oxygen: 100,
+			oxygen: 12,
 			battery: 100,
-			co2: 0,
-			heartRate: 100,
+			co2: 570,
+			heartRate: 140,
 			temperature: 99,
 			location: 'Mars',
 			fanSpeed: 74
@@ -55,8 +55,8 @@
 			name: 'John Doe',
 			oxygen: 100,
 			battery: 99,
-			co2: 0,
-			heartRate: 100,
+			co2: 2170,
+			heartRate: 124,
 			temperature: 0,
 			location: 'Mars',
 			fanSpeed: 63
@@ -65,8 +65,8 @@
 			name: 'Jane Doe',
 			oxygen: 100,
 			battery: 100,
-			co2: 0,
-			heartRate: 99,
+			co2: 178,
+			heartRate: 255,
 			temperature: 100,
 			location: 'Mars',
 			fanSpeed: 69
@@ -75,7 +75,7 @@
 			name: 'John Doe',
 			oxygen: 100,
 			battery: 99,
-			co2: 0,
+			co2: 179,
 			heartRate: 99,
 			temperature: 98,
 			location: 'Mars',
@@ -84,8 +84,8 @@
 		{
 			name: 'Jane Doe',
 			oxygen: 100,
-			battery: 100,
-			co2: 0,
+			battery: 30,
+			co2: 178,
 			heartRate: 100,
 			temperature: 99,
 			location: 'Mars',
@@ -94,8 +94,8 @@
 		{
 			name: 'John Doe',
 			oxygen: 100,
-			battery: 100,
-			co2: 0,
+			battery: 0,
+			co2: 300,
 			heartRate: 99,
 			temperature: 99,
 			location: 'Mars',
@@ -105,7 +105,7 @@
 			name: 'Jane Doe',
 			oxygen: 99,
 			battery: 99,
-			co2: 0,
+			co2: -2147483648,
 			heartRate: 100,
 			temperature: 98,
 			fanSpeed: 91
@@ -121,6 +121,49 @@
 		if (delta > 3) {
 			return errorColor;
 		} else if (delta > 1) {
+			return warningColor;
+		} else {
+			return goodColor;
+		}
+	}
+
+	function HeartRateValidation(heartRate) {
+		let target = 90;
+		let delta = Math.abs(heartRate - target);
+		if (delta > 40) {
+			return errorColor;
+		} else if (delta > 20) {
+			return warningColor;
+		} else {
+			return goodColor;
+		}
+	}
+
+	function CO2Validation(co2) {
+		co2 = Math.abs(co2);
+		if (co2 > 1000) {
+			return errorColor;
+		} else if (co2 > 500) {
+			return warningColor;
+		} else {
+			return goodColor;
+		}
+	}
+
+	function BatteryValidation(battery) {
+		if (battery < 10) {
+			return errorColor;
+		} else if (battery < 50) {
+			return warningColor;
+		} else {
+			return goodColor;
+		}
+	}
+
+	function OxygenValidation(oxygen) {
+		if (oxygen < 25) {
+			return errorColor;
+		} else if (oxygen < 50) {
 			return warningColor;
 		} else {
 			return goodColor;
@@ -147,13 +190,27 @@
 			{#each filteredItems as prcedure}
 				<TableBodyRow>
 					<TableBodyCell>{prcedure.name}</TableBodyCell>
-					<TableBodyCell>{prcedure.oxygen}</TableBodyCell>
-					<TableBodyCell>{prcedure.battery}</TableBodyCell>
-					<TableBodyCell>{prcedure.co2}</TableBodyCell>
-					<TableBodyCell>{prcedure.heartRate}</TableBodyCell>
+					<TableBodyCell>
+						<span class={OxygenValidation(prcedure.oxygen)}>
+							{prcedure.oxygen.toLocaleString()}%
+						</span>
+					</TableBodyCell>
+					<TableBodyCell>
+						<span class={BatteryValidation(prcedure.battery)}>
+							{prcedure.battery.toLocaleString()}%
+						</span>
+					</TableBodyCell>
+					<TableBodyCell>
+						<span class={CO2Validation(prcedure.co2)}>{prcedure.co2.toLocaleString()} PPM</span>
+					</TableBodyCell>
+					<TableBodyCell>
+						<span class={HeartRateValidation(prcedure.heartRate)}>
+							{prcedure.heartRate.toLocaleString()} BPM
+						</span>
+					</TableBodyCell>
 					<TableBodyCell>
 						<span class={TemperatureValidation(prcedure.temperature)}>
-							{prcedure.temperature} &deg;F
+							{prcedure.temperature.toLocaleString()} &deg;F
 						</span>
 					</TableBodyCell>
 				</TableBodyRow>
