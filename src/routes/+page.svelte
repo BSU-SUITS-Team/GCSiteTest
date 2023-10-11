@@ -6,6 +6,7 @@
 	import {notifications} from './store.js'
 
 	function doNotify() {
+		console.log("test");
 		notifications.addNotification("Oxygen Tank Has Exploaded", "error", 300)
 	}
 </script>

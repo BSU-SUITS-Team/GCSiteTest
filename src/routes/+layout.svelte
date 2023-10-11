@@ -17,8 +17,6 @@
 	let hasNotification = false;
 	let notificationText = "Oxygen Tank Has Exploaded"
 
-	let notificationList = []
-
 	function notify(text) {
 		notificationList.push(text)
 		notificationText = text
@@ -54,10 +52,13 @@
 	<main class="flex flex-col flex-1 ml-72 overflow-y-auto mr-72">
 		<div class="absolute right-5 top-5 z-50">
 			{#each notifications as notification}
-			<Toast transition={slide} open={hasNotification}>
+			<!-- <Toast transition={slide} open={hasNotification}>
 				<ExclamationCircleOutline slot="icon" class="w-5 h-5" />
 				{notification["message"]}
-			</Toast>
+			</Toast> -->
+			<div class="w-10 h-10 bg-black text-white">
+				{notification["message"]}
+			</div>
 			{/each}
 		</div>
 		<slot></slot>
