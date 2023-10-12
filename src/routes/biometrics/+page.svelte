@@ -105,7 +105,7 @@
 			name: 'Jane Doe',
 			oxygen: 99,
 			battery: 99,
-			co2: -2147483648,
+			co2: 245,
 			heartRate: 100,
 			temperature: 98,
 			fanSpeed: 91
@@ -204,18 +204,19 @@
 			worst = warningColor;
 		}
 		
-		const bgError = 'bg-red-400';
-		const bgWarning = 'bg-orange-400';
+		// const bgError = 'bg-red-400';
+		// const bgWarning = 'bg-orange-400';
 
-		if (worst == errorColor){
-			return bgError;
-		}
-		else if (worst == warningColor){
-			return bgWarning;
-		}
-		else{
-			return '';
-		}
+		// if (worst == errorColor){
+		// 	return bgError;
+		// }
+		// else if (worst == warningColor){
+		// 	return bgWarning;
+		// }
+		// else{
+		// 	return '';
+		// }
+		return worst;
 	}
 
 	let searchTerm = '';
@@ -246,9 +247,9 @@
 		</TableHead>
 		<TableBody class="divide-y">
 			{#each filteredItems as prcedure}
-				<TableBodyRow class={GetWorst(prcedure)}>
+				<TableBodyRow>
 					<TableBodyCell>
-						<span>
+						<span class={GetWorst(prcedure)}>
 							{prcedure.name}
 						</span>
 					</TableBodyCell>
