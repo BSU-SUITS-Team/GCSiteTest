@@ -112,9 +112,9 @@
 		}
 	];
 
-	const errorColor = 'p-2 rounded-md bg-red-600 text-red-950';
-	const warningColor = 'p-2 rounded-md bg-orange-500 text-orange-950';
-	const goodColor = 'p-2 rounded-md ';
+	const errorColor = 'p-2 text-align-left rounded-md bg-red-600 text-red-950';
+	const warningColor = 'p-2 text-align-left rounded-md bg-orange-500 text-orange-950';
+	const goodColor = 'p-2 text-align-left rounded-md ';
 
 	function TemperatureValidation(temperature) {
 		let delta = Math.abs(temperature - 98.6);
@@ -170,6 +170,54 @@
 		}
 	}
 
+	//This code is appaling, but it works
+	function GetWorst(astonaut){
+		let worst = goodColor;
+		if (OxygenValidation(astonaut.oxygen) == errorColor){
+			worst = errorColor;
+		}
+		else if (OxygenValidation(astonaut.oxygen) == warningColor && worst != errorColor){
+			worst = warningColor;
+		}
+		if (BatteryValidation(astonaut.battery) == errorColor){
+			worst = errorColor;
+		}
+		else if (BatteryValidation(astonaut.battery) == warningColor && worst != errorColor){
+			worst = warningColor;
+		}
+		if (CO2Validation(astonaut.co2) == errorColor){
+			worst = errorColor;
+		}
+		else if (CO2Validation(astonaut.co2) == warningColor && worst != errorColor){
+			worst = warningColor;
+		}
+		if (HeartRateValidation(astonaut.heartRate) == errorColor){
+			worst = errorColor;
+		}
+		else if (HeartRateValidation(astonaut.heartRate) == warningColor && worst != errorColor){
+			worst = warningColor;
+		}
+		if (TemperatureValidation(astonaut.temperature) == errorColor){
+			worst = errorColor;
+		}
+		else if (TemperatureValidation(astonaut.temperature) == warningColor && worst != errorColor){
+			worst = warningColor;
+		}
+		
+		const bgError = 'bg-red-400';
+		const bgWarning = 'bg-orange-400';
+
+		if (worst == errorColor){
+			return bgError;
+		}
+		else if (worst == warningColor){
+			return bgWarning;
+		}
+		else{
+			return '';
+		}
+	}
+
 	let searchTerm = '';
 	$: filteredItems = astronauts.filter((astronaut) =>
 		astronaut.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -180,35 +228,49 @@
 	<TableSearch hoverable bind:inputValue={searchTerm}>
 		<TableHead>
 			<TableHeadCell>Name</TableHeadCell>
-			<TableHeadCell>Oxygen</TableHeadCell>
-			<TableHeadCell>Battery</TableHeadCell>
-			<TableHeadCell>CO2</TableHeadCell>
-			<TableHeadCell>Heart Rate</TableHeadCell>
-			<TableHeadCell>Temperature</TableHeadCell>
+			<TableHeadCell>
+				Oxygen
+			</TableHeadCell>
+			<TableHeadCell>
+				Battery
+			</TableHeadCell>
+			<TableHeadCell>
+				CO2
+			</TableHeadCell>
+			<TableHeadCell>
+				Heart Rate
+			</TableHeadCell>
+			<TableHeadCell>
+				Temperature
+			</TableHeadCell>
 		</TableHead>
 		<TableBody class="divide-y">
 			{#each filteredItems as prcedure}
-				<TableBodyRow>
-					<TableBodyCell>{prcedure.name}</TableBodyCell>
+				<TableBodyRow class={GetWorst(prcedure)}>
 					<TableBodyCell>
+						<span>
+							{prcedure.name}
+						</span>
+					</TableBodyCell>
+					<TableBodyCell >
 						<span class={OxygenValidation(prcedure.oxygen)}>
 							{prcedure.oxygen.toLocaleString()}%
 						</span>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell >
 						<span class={BatteryValidation(prcedure.battery)}>
 							{prcedure.battery.toLocaleString()}%
 						</span>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell >
 						<span class={CO2Validation(prcedure.co2)}>{prcedure.co2.toLocaleString()} PPM</span>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell >
 						<span class={HeartRateValidation(prcedure.heartRate)}>
 							{prcedure.heartRate.toLocaleString()} BPM
 						</span>
 					</TableBodyCell>
-					<TableBodyCell>
+					<TableBodyCell >
 						<span class={TemperatureValidation(prcedure.temperature)}>
 							{prcedure.temperature.toLocaleString()} &deg;F
 						</span>
