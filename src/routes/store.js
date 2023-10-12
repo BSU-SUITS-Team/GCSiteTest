@@ -40,9 +40,10 @@ const initialKeepables = {};
 //     ...
 // }
 const initialGraphs = {};
-// {notification_name: {status: 'warning', message: 'message'},
-//  notification_name: {status: 'error', message: 'message'}, ... }
-const initialNotifications = {};
+
+// This has a dataformat of:
+// [{notification_name: 'warning'}, {notification_name: 'error'}, ...]
+const initialNotifications = [];
 
 function createKeepablesStore() {
     const { subscribe, set, update } = writable(initialKeepables);
@@ -104,13 +105,14 @@ function createNotificationsStore() {
 
     return {
         subscribe,
-        addNotification: (name, status, message) => update(n => {
-            n[name] = {status, message};
-            return { ...n };
+        addNotification: (name, status) => update(n => {
+            console.log('addNotification', name, status);
+            n.push({name, status});
+            return [...n];
         }),
         removeNotification: (name) => update(n => {
-            delete n[name];
-            return { ...n };
+            console.log('removeNotification', name);
+            return n.filter(({name: nname}) => nname !== name);
         }),
     };
 }

@@ -9,26 +9,35 @@
 		TrashBinOutline,
 		FileEditSolid,
 		CheckCircleSolid,
-		ExclamationCircleOutline
+		ExclamationCircleOutline,
+
+		CheckCircleOutline,
+
+		AnnotationOutline,
+
+		LightbulbOutline
+
+
+
 	} from 'flowbite-svelte-icons';
 	import Graph from './graph.svelte';
 	import TinyGraph from './TinyGraph.svelte';
 
 	let hasNotification = false;
-	let notificationText = "Oxygen Tank Has Exploaded"
+	let notificationText = 'Oxygen Tank Has Exploaded';
 
 	function notify(text) {
-		notificationList.push(text)
-		notificationText = text
-		hasNotification = true
+		notificationList.push(text);
+		notificationText = text;
+		hasNotification = true;
 		setTimeout(() => {
-			notificationList.shift()
+			notificationList.shift();
 			if (notificationList.length > 0) {
-				notificationText = notificationList[0]
+				notificationText = notificationList[0];
 			} else {
-				hasNotification = false
+				hasNotification = false;
 			}
-		}, 15000)
+		}, 15000);
 	}
 </script>
 
@@ -51,17 +60,26 @@
 
 	<main class="flex flex-col flex-1 ml-72 overflow-y-auto mr-72">
 		<div class="absolute right-5 top-5 z-50">
-			{#each notifications as notification}
-			<!-- <Toast transition={slide} open={hasNotification}>
-				<ExclamationCircleOutline slot="icon" class="w-5 h-5" />
-				{notification["message"]}
-			</Toast> -->
-			<div class="w-10 h-10 bg-black text-white">
-				{notification["message"]}
-			</div>
+			{#each $notifications as notification}
+				{#if notification["status"] == "error"}
+					<Toast transition={slide} class="mb-2" color="red">
+						<ExclamationCircleOutline slot="icon" class="w-5 h-5" />
+						{notification["name"]}
+					</Toast>
+				{:else if notification["status"] == "warn"}
+					<Toast transition={slide} class="mb-2">
+						<AnnotationOutline slot="icon" class="w-5 h-5" />
+						{notification["name"]}
+					</Toast>
+				{:else if notification["status"] == "info"}
+					<Toast transition={slide} class="mb-2" color="gray">
+						<LightbulbOutline slot="icon" class="w-5 h-5" />
+						{notification["name"]}
+					</Toast>
+				{/if}
 			{/each}
 		</div>
-		<slot></slot>
+		<slot />
 	</main>
 
 	<div
