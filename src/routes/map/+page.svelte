@@ -1,6 +1,7 @@
 <script>
+    import bg from '$lib/images/MapTest.png';
 </script>
 
-<div>
-    This is a placeholder for the map page.
+<div class="bg-black w-full h-full">
+    <img src={bg} alt="">
 </div>

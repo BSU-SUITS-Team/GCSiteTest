@@ -26,6 +26,7 @@
 	"dependencies": {
 		"flowbite": "^1.8.1",
 		"flowbite-svelte": "^0.44.17",
-		"flowbite-svelte-icons": "^0.4.4"
+		"flowbite-svelte-icons": "^0.4.4",
+		"svelte-zoom": "^1.0.16"
 	}
 }
