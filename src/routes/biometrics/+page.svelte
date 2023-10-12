@@ -112,9 +112,9 @@
 		}
 	];
 
-	const errorColor = 'text-red-600';
-	const warningColor = 'text-orange-400';
-	const goodColor = 'text-green-400';
+	const errorColor = 'p-2 rounded-md bg-red-600 text-red-950';
+	const warningColor = 'p-2 rounded-md bg-orange-500 text-orange-950';
+	const goodColor = 'p-2 rounded-md ';
 
 	function TemperatureValidation(temperature) {
 		let delta = Math.abs(temperature - 98.6);
