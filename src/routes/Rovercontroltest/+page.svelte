@@ -3,8 +3,7 @@
 	import { onMount } from 'svelte';
 	let clicked = false;
 	let poll;
-	/** @type {import('./$types').PageData} */
-	export let data;
+	
 
 	// window.ongamepadconnected=(e) => {console.log(e);}
 	onMount(() => {
@@ -40,6 +39,7 @@
 	function unPlug() {}
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
 	on:mousedown={() => {
 		printconnectedgamepads();
