@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import PinButton from './PinButton.svelte';
+	import BoxButton from './BoxButton.svelte';
 
 	let scale = 1;
 	let offsetX = 0;
@@ -40,8 +41,8 @@
 
 	function handleMouseDown(event) {
 		if (isPlacingPin) {
-			const x = event.clientX - event.currentTarget.offsetLeft; 
-    		const y = event.clientY - event.currentTarget.offsetTop; 
+			const x = event.clientX - event.currentTarget.offsetLeft;
+			const y = event.clientY - event.currentTarget.offsetTop;
 			const correctedX = (x - offsetX) / scale;
 			const correctedY = (y - offsetY) / scale;
 
@@ -107,15 +108,20 @@
 	transform-origin: 0 0;
   "
 		>
-			<PinButton color={pin.type} move/>
+			<PinButton color={pin.type} move />
 		</div>
 	{/each}
 
 	<div class="absolute z-10 top-5 w-full">
 		<div class="flex justify-center">
 			<div class="mb-4 p-2 shadow-xl rounded-lg flex flex-row bg-white w-fit dark:bg-gray-800">
-				<PinButton color="red" onclick={() => startPlacingPin('red')} />
+				<BoxButton color="red" />
+			</div>
+			<div
+				class="mb-4 p-2 shadow-xl rounded-lg flex flex-row bg-white w-fit dark:bg-gray-800 ml-1 mr-1"
+			>
 				<PinButton color="orange" onclick={() => startPlacingPin('orange')} />
+				<PinButton color="red" onclick={() => startPlacingPin('red')} />
 				<PinButton color="blue" onclick={() => startPlacingPin('blue')} />
 				<PinButton color="green" onclick={() => startPlacingPin('green')} />
 			</div>
