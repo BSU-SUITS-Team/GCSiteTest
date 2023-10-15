@@ -7,6 +7,10 @@
 	let offsetY = 0;
 	let isPanning = false;
 	let startX, startY;
+	// ex. [{type: 'red', x: 100, y: 100}, {type: 'blue', x: 200, y: 200}]
+	let pins = [];
+	let isPlacingPin = false;
+
 	export let image;
 	export let initalSize = 1;
 	export let minScale = 0.1;
@@ -35,9 +39,21 @@
 	}
 
 	function handleMouseDown(event) {
+		if (isPlacingPin) {
+			const correctedX = (event.clientX - offsetX) / scale;
+			const correctedY = (event.clientY - offsetY) / scale;
+
+			pins = [...pins, { type: isPlacingPin, x: correctedX, y: correctedY }];
+			isPlacingPin = false;
+			return;
+		}
 		isPanning = true;
 		startX = event.clientX - offsetX;
 		startY = event.clientY - offsetY;
+	}
+
+	function startPlacingPin(type) {
+		isPlacingPin = type;
 	}
 
 	function handleMouseMove(event) {
@@ -82,14 +98,25 @@
       cursor: grab;
     "
 >
+	{#each pins as pin}
+		<div
+			class="absolute z-10"
+			style="
+	transform: translate3d({pin.x * scale + offsetX}px, {pin.y * scale + offsetY}px, 0);
+	transform-origin: 0 0;
+  "
+		>
+			<PinButton color={pin.type} />
+		</div>
+	{/each}
+
 	<div class="absolute z-10 top-5 w-full">
 		<div class="flex justify-center">
-			<div class="mb-4 p-2 shadow-xl rounded-lg flex flex-row bg-white w-fit">
-				<PinButton />
-				<PinButton />
-				<PinButton />
-				<PinButton />
-				<PinButton />
+			<div class="mb-4 p-2 shadow-xl rounded-lg flex flex-row bg-white w-fit dark:bg-gray-800">
+				<PinButton color="red" onclick={() => startPlacingPin('red')} />
+				<PinButton color="orange" />
+				<PinButton color="blue" />
+				<PinButton color="grey" />
 			</div>
 		</div>
 	</div>

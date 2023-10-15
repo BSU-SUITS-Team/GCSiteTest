@@ -9,7 +9,7 @@
 <Panview
 	image={img}
 	initalSize="10"
-	minScale="3"
+	minScale="2"
 	maxScale="20"
 	xRange={[-1000, 0]}
 	yRange={[-1000, 0]}
