@@ -1,10 +1,18 @@
 <script>
+	import { onMount } from 'svelte';
+	import PinButton from './PinButton.svelte';
+
 	let scale = 1;
 	let offsetX = 0;
 	let offsetY = 0;
 	let isPanning = false;
 	let startX, startY;
 	export let image;
+	export let initalSize = 1;
+	export let minScale = 0.1;
+	export let maxScale = 10;
+	export let xRange = [0, 9999999];
+	export let yRange = [0, 9999999];
 
 	function handleWheel(event) {
 		const delta = event.deltaY < 0 ? 1.1 : 0.9;
@@ -12,10 +20,13 @@
 		const x = event.clientX - rect.left;
 		const y = event.clientY - rect.top;
 
-		const newScale = scale * delta;
+		const newScale = Math.max(minScale, Math.min(maxScale, scale * delta));
 
-		offsetX = ((offsetX - x) * newScale) / scale + x;
-		offsetY = ((offsetY - y) * newScale) / scale + y;
+		const newOffsetX = ((offsetX - x) * newScale) / scale + x;
+		const newOffsetY = ((offsetY - y) * newScale) / scale + y;
+
+		offsetX = Math.min(xRange[1], Math.max(xRange[0], newOffsetX));
+		offsetY = Math.min(yRange[1], Math.max(yRange[0], newOffsetY));
 
 		scale = newScale;
 	}
@@ -28,8 +39,12 @@
 
 	function handleMouseMove(event) {
 		if (isPanning) {
-			offsetX = event.clientX - startX;
-			offsetY = event.clientY - startY;
+			const newOffsetX = event.clientX - startX;
+			const newOffsetY = event.clientY - startY;
+			console.log(newOffsetX, newOffsetY);
+
+			offsetX = Math.min(xRange[1], Math.max(xRange[0], newOffsetX));
+			offsetY = Math.min(yRange[1], Math.max(yRange[0], newOffsetY));
 		}
 	}
 
@@ -37,9 +52,15 @@
 		isPanning = false;
 	}
 
-	function handleDragStart(evnet) {
+	function handleDragStart(event) {
 		event.preventDefault();
 	}
+
+	onMount(() => {
+		scale = initalSize;
+		// offsetX = (window.innerWidth - image.width * initalSize) / 2;
+		// offsetY = (window.innerHeight - image.height * initalSize) / 2;
+	});
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -58,13 +79,25 @@
       cursor: grab;
     "
 >
+	<div class="absolute z-10 top-5 w-full">
+		<div class="flex justify-center">
+			<div class="mb-4 p-2 shadow-xl rounded-lg flex flex-row bg-white w-fit">
+				<PinButton />
+				<PinButton />
+				<PinButton />
+				<PinButton />
+				<PinButton />
+			</div>
+		</div>
+	</div>
 	<img
 		src={image}
 		alt="a giant spaceship"
 		style="
-        transform: translate3d({offsetX}px, {offsetY}px, 0) scale({scale});
-        transform-origin: 0 0;
-        position: relative;
-      "
+		transform: translate3d({offsetX}px, {offsetY}px, 0) scale({scale});
+		transform-origin: 0 0;
+		position: relative;
+		"
+		class="top-0 left-0"
 	/>
 </div>
