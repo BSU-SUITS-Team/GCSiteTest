@@ -25,6 +25,9 @@
 		const newOffsetX = ((offsetX - x) * newScale) / scale + x;
 		const newOffsetY = ((offsetY - y) * newScale) / scale + y;
 
+		xRange = [xRange[0] * newScale, xRange[1] * newScale];
+		yRange = [yRange[0] * newScale, yRange[1] * newScale];
+
 		offsetX = Math.min(xRange[1], Math.max(xRange[0], newOffsetX));
 		offsetY = Math.min(yRange[1], Math.max(yRange[0], newOffsetY));
 
