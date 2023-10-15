@@ -11,6 +11,7 @@
 	// ex. [{type: 'red', x: 100, y: 100}, {type: 'blue', x: 200, y: 200}]
 	let pins = [];
 	let isPlacingPin = false;
+	let buttons = [true, true, true, true]
 
 	export let image;
 	export let initalSize = 1;
@@ -48,6 +49,7 @@
 
 			pins = [...pins, { type: isPlacingPin, x: correctedX, y: correctedY }];
 			isPlacingPin = false;
+			buttons = buttons.map(() => true);
 			return;
 		}
 		isPanning = true;
@@ -55,8 +57,9 @@
 		startY = event.clientY - offsetY;
 	}
 
-	function startPlacingPin(type) {
+	function startPlacingPin(type, index) {
 		isPlacingPin = type;
+		buttons = buttons.map((_, i) => i == index);
 	}
 
 	function handleMouseMove(event) {
@@ -80,8 +83,6 @@
 
 	onMount(() => {
 		scale = initalSize;
-		// offsetX = (window.innerWidth - image.width * initalSize) / 2;
-		// offsetY = (window.innerHeight - image.height * initalSize) / 2;
 	});
 </script>
 
@@ -120,10 +121,10 @@
 			<div
 				class="mb-4 p-2 shadow-xl rounded-lg flex flex-row bg-white w-fit dark:bg-gray-800 ml-1 mr-1"
 			>
-				<PinButton color="orange" onclick={() => startPlacingPin('orange')} />
-				<PinButton color="red" onclick={() => startPlacingPin('red')} />
-				<PinButton color="blue" onclick={() => startPlacingPin('blue')} />
-				<PinButton color="green" onclick={() => startPlacingPin('green')} />
+				<PinButton color="orange" onclick={() => startPlacingPin('orange', 0)} bind:bright={buttons[0]}/>
+				<PinButton color="red" onclick={() => startPlacingPin('red', 1)} bind:bright={buttons[1]}/>
+				<PinButton color="blue" onclick={() => startPlacingPin('blue', 2)} bind:bright={buttons[2]}/>
+				<PinButton color="green" onclick={() => startPlacingPin('green', 3)} bind:bright={buttons[3]}/>
 			</div>
 		</div>
 	</div>
