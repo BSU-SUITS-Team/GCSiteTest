@@ -115,9 +115,9 @@
 		<div class="flex justify-center">
 			<div class="mb-4 p-2 shadow-xl rounded-lg flex flex-row bg-white w-fit dark:bg-gray-800">
 				<PinButton color="red" onclick={() => startPlacingPin('red')} />
-				<PinButton color="orange" />
-				<PinButton color="blue" />
-				<PinButton color="grey" />
+				<PinButton color="orange" onclick={() => startPlacingPin('orange')} />
+				<PinButton color="blue" onclick={() => startPlacingPin('blue')} />
+				<PinButton color="green" onclick={() => startPlacingPin('green')} />
 			</div>
 		</div>
 	</div>
