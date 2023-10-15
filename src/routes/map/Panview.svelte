@@ -40,8 +40,10 @@
 
 	function handleMouseDown(event) {
 		if (isPlacingPin) {
-			const correctedX = (event.clientX - offsetX) / scale;
-			const correctedY = (event.clientY - offsetY) / scale;
+			const x = event.clientX - event.currentTarget.offsetLeft; 
+    		const y = event.clientY - event.currentTarget.offsetTop; 
+			const correctedX = (x - offsetX) / scale;
+			const correctedY = (y - offsetY) / scale;
 
 			pins = [...pins, { type: isPlacingPin, x: correctedX, y: correctedY }];
 			isPlacingPin = false;
@@ -95,7 +97,6 @@
       width: 100%;
       height: 100%;
       position: relative;
-      cursor: grab;
     "
 >
 	{#each pins as pin}
@@ -106,7 +107,7 @@
 	transform-origin: 0 0;
   "
 		>
-			<PinButton color={pin.type} />
+			<PinButton color={pin.type} move/>
 		</div>
 	{/each}
 

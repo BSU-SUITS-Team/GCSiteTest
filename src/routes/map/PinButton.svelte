@@ -3,10 +3,14 @@
 
 	export let color = 'primary';
 	export let onclick = () => {};
+	export let move = false;
 </script>
 
-<MapPinAltSolid 
-	on:click={onclick}
-	class="m-2 w-5 h-5 text-{color}-500 
-	transition duration-75"
-/>
+<div>
+	<MapPinAltSolid 
+		on:click={onclick}
+		class="m-2 w-5 h-5 text-{color}-500 
+		transition duration-75"
+		style="{move ? 'transform: translate3d(-95%, -150%, 0);' : ''}"
+	/>
+</div>
