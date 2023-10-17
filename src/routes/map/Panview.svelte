@@ -121,7 +121,7 @@
 			<div
 				class="mb-4 p-2 shadow-xl rounded-lg flex flex-row bg-white w-fit dark:bg-gray-800 ml-1 mr-1"
 			>
-				<PinButton color="orange" onclick={() => startPlacingPin('orange', 0)} bind:bright={buttons[0]}/>
+				<PinButton color="black" onclick={() => startPlacingPin('black', 0)} bind:bright={buttons[0]}/>
 				<PinButton color="red" onclick={() => startPlacingPin('red', 1)} bind:bright={buttons[1]}/>
 				<PinButton color="blue" onclick={() => startPlacingPin('blue', 2)} bind:bright={buttons[2]}/>
 				<PinButton color="green" onclick={() => startPlacingPin('green', 3)} bind:bright={buttons[3]}/>
