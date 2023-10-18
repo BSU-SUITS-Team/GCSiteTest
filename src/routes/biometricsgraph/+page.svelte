@@ -7,8 +7,16 @@
 		TableHeadCell,
 		TableBody,
 		TableBodyRow,
-		TableBodyCell
+		TableBodyCell,
+		Card,
+		Heading
 	} from 'flowbite-svelte';
+	import Chart from './chart.svelte';
+	import {
+		CheckCircleOutline,
+		ExclamationCircleOutline,
+		XCircleOutline
+	} from 'flowbite-svelte-icons';
 
 	let astronauts = [
 		{
@@ -30,85 +38,6 @@
 			temperature: 4,
 			location: 'Mars',
 			fanSpeed: 94
-		},
-		{
-			name: 'John Doe',
-			oxygen: 30,
-			battery: 100,
-			co2: 178,
-			heartRate: 110,
-			temperature: 98,
-			location: 'Mars',
-			fanSpeed: 77
-		},
-		{
-			name: 'Jane Doe',
-			oxygen: 12,
-			battery: 100,
-			co2: 570,
-			heartRate: 140,
-			temperature: 99,
-			location: 'Mars',
-			fanSpeed: 74
-		},
-		{
-			name: 'John Doe',
-			oxygen: 100,
-			battery: 99,
-			co2: 2170,
-			heartRate: 124,
-			temperature: 0,
-			location: 'Mars',
-			fanSpeed: 63
-		},
-		{
-			name: 'Jane Doe',
-			oxygen: 100,
-			battery: 100,
-			co2: 178,
-			heartRate: 255,
-			temperature: 100,
-			location: 'Mars',
-			fanSpeed: 69
-		},
-		{
-			name: 'John Doe',
-			oxygen: 100,
-			battery: 99,
-			co2: 179,
-			heartRate: 99,
-			temperature: 98,
-			location: 'Mars',
-			fanSpeed: 79
-		},
-		{
-			name: 'Jane Doe',
-			oxygen: 100,
-			battery: 30,
-			co2: 178,
-			heartRate: 100,
-			temperature: 99,
-			location: 'Mars',
-			fanSpeed: 71
-		},
-		{
-			name: 'John Doe',
-			oxygen: 100,
-			battery: 0,
-			co2: 300,
-			heartRate: 99,
-			temperature: 99,
-			location: 'Mars',
-			fanSpeed: 51
-		},
-		{
-			name: 'Jane Doe',
-			oxygen: 99,
-			battery: 99,
-			co2: 245,
-			heartRate: 100,
-			temperature: 98,
-			fanSpeed: 91
 		}
 	];
 
@@ -171,113 +100,73 @@
 	}
 
 	//This code is appaling, but it works
-	function GetWorst(astonaut){
+	function GetWorst(astonaut) {
 		let worst = goodColor;
-		if (OxygenValidation(astonaut.oxygen) == errorColor){
+		if (OxygenValidation(astonaut.oxygen) == errorColor) {
 			worst = errorColor;
-		}
-		else if (OxygenValidation(astonaut.oxygen) == warningColor && worst != errorColor){
+		} else if (OxygenValidation(astonaut.oxygen) == warningColor && worst != errorColor) {
 			worst = warningColor;
 		}
-		if (BatteryValidation(astonaut.battery) == errorColor){
+		if (BatteryValidation(astonaut.battery) == errorColor) {
 			worst = errorColor;
-		}
-		else if (BatteryValidation(astonaut.battery) == warningColor && worst != errorColor){
+		} else if (BatteryValidation(astonaut.battery) == warningColor && worst != errorColor) {
 			worst = warningColor;
 		}
-		if (CO2Validation(astonaut.co2) == errorColor){
+		if (CO2Validation(astonaut.co2) == errorColor) {
 			worst = errorColor;
-		}
-		else if (CO2Validation(astonaut.co2) == warningColor && worst != errorColor){
+		} else if (CO2Validation(astonaut.co2) == warningColor && worst != errorColor) {
 			worst = warningColor;
 		}
-		if (HeartRateValidation(astonaut.heartRate) == errorColor){
+		if (HeartRateValidation(astonaut.heartRate) == errorColor) {
 			worst = errorColor;
-		}
-		else if (HeartRateValidation(astonaut.heartRate) == warningColor && worst != errorColor){
+		} else if (HeartRateValidation(astonaut.heartRate) == warningColor && worst != errorColor) {
 			worst = warningColor;
 		}
-		if (TemperatureValidation(astonaut.temperature) == errorColor){
+		if (TemperatureValidation(astonaut.temperature) == errorColor) {
 			worst = errorColor;
-		}
-		else if (TemperatureValidation(astonaut.temperature) == warningColor && worst != errorColor){
+		} else if (TemperatureValidation(astonaut.temperature) == warningColor && worst != errorColor) {
 			worst = warningColor;
 		}
-		
-		// const bgError = 'bg-red-400';
-		// const bgWarning = 'bg-orange-400';
 
-		// if (worst == errorColor){
-		// 	return bgError;
-		// }
-		// else if (worst == warningColor){
-		// 	return bgWarning;
-		// }
-		// else{
-		// 	return '';
-		// }
 		return worst;
 	}
-
-	let searchTerm = '';
-	$: filteredItems = astronauts.filter((astronaut) =>
-		astronaut.name.toLowerCase().includes(searchTerm.toLowerCase())
-	);
 </script>
 
 <div class="h-full mr-24 overflow-auto">
-	<TableSearch hoverable bind:inputValue={searchTerm}>
-		<TableHead>
-			<TableHeadCell>Name</TableHeadCell>
-			<TableHeadCell>
-				Oxygen
-			</TableHeadCell>
-			<TableHeadCell>
-				Battery
-			</TableHeadCell>
-			<TableHeadCell>
-				CO2
-			</TableHeadCell>
-			<TableHeadCell>
-				Heart Rate
-			</TableHeadCell>
-			<TableHeadCell>
-				Temperature
-			</TableHeadCell>
-		</TableHead>
-		<TableBody class="divide-y">
-			{#each filteredItems as prcedure}
-				<TableBodyRow>
-					<TableBodyCell>
-						<span class={GetWorst(prcedure)}>
-							{prcedure.name}
-						</span>
-					</TableBodyCell>
-					<TableBodyCell >
-						<span class={OxygenValidation(prcedure.oxygen)}>
-							{prcedure.oxygen.toLocaleString()}%
-						</span>
-					</TableBodyCell>
-					<TableBodyCell >
-						<span class={BatteryValidation(prcedure.battery)}>
-							{prcedure.battery.toLocaleString()}%
-						</span>
-					</TableBodyCell>
-					<TableBodyCell >
-						<span class={CO2Validation(prcedure.co2)}>{prcedure.co2.toLocaleString()} PPM</span>
-					</TableBodyCell>
-					<TableBodyCell >
-						<span class={HeartRateValidation(prcedure.heartRate)}>
-							{prcedure.heartRate.toLocaleString()} BPM
-						</span>
-					</TableBodyCell>
-					<TableBodyCell >
-						<span class={TemperatureValidation(prcedure.temperature)}>
-							{prcedure.temperature.toLocaleString()} &deg;F
-						</span>
-					</TableBodyCell>
-				</TableBodyRow>
+	{#each astronauts as astro}
+		<Card class="mb-2">
+			<div class="flex justify-between flex-row border-b mb-2 pb-2">
+				<div>
+					<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
+						{astro.name}
+					</h5>
+					<p class="text-base font-normal text-gray-500 dark:text-gray-400">Biometrics</p>
+				</div>
+				<div
+					class="flex items-top px-2.5 py-0.5 text-base font-semibold text-red-500 dark:text-red-500 text-center"
+				>
+					<CheckCircleOutline class="w-5 h-5 ml-1 mt-2 text-green-500" />
+					<ExclamationCircleOutline class="w-5 h-5 ml-1 mt-2 text-orange-500" />
+				</div>
+			</div>
+			<!-- <div class="flex flex-row justify-between pb-2">
+				<p class=" text-black">
+					Oxygen
+					<span class="text-green-500"> 52% </span>
+				</p>
+				<Chart />
+			</div> -->
+			{#each Object.keys(astro) as key}
+				{#if key != 'name' && key != 'location' && key != 'fanSpeed'}
+					<div class="flex flex-row justify-between pb-2">
+						<p class=" text-black">
+							{key}
+							<span class="text-green-500"> {astro[key]} </span>
+						</p>
+						<Chart />
+					</div>
+				{/if}
 			{/each}
-		</TableBody>
-	</TableSearch>
+		</Card>
+	{/each}
 </div>
