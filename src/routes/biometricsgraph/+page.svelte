@@ -22,7 +22,7 @@
 		{
 			name: 'John Doe',
 			oxygen: 99,
-			battery: 100,
+			battery: 22,
 			co2: 178,
 			heartRate: 0,
 			temperature: 99,
@@ -32,7 +32,7 @@
 		{
 			name: 'Jane Doe',
 			oxygen: 70,
-			battery: 100,
+			battery: 21,
 			co2: 178,
 			heartRate: 100,
 			temperature: 4,
@@ -44,35 +44,35 @@
 	// total range, warning range, nominal range
 	let ranges = {
 		oxygen: [
-			100,
+			[0, 100],
 			[25, 100],
 			[75, 100]
 		],
 		battery: [
-			24,
+			[5, 24],
 			[10, 24],
 			[20, 24]
 		],
 		co2: [
-			10000,
+			[0, 2000],
 			[0, 1000],
 			[50, 500]
 		],
 		heartRate: [
-			200,
+			[30, 200],
 			[50, 160],
 			[60, 100]
 		],
 		temperature: [
-			200,
+			[80, 120],
 			[95, 100],
 			[97, 99]
 		]
 	};
 
-	const errorColor = 'p-2 text-align-left rounded-md bg-red-600 text-red-950';
-	const warningColor = 'p-2 text-align-left rounded-md bg-orange-500 text-orange-950';
-	const goodColor = 'p-2 text-align-left rounded-md ';
+	const errorColor = 'text-red-500 font-bold';
+	const warningColor = 'text-orange-500 font-bold';
+	const goodColor = 'text-green-500';
 
 	function TemperatureValidation(temperature) {
 		let delta = Math.abs(temperature - 98.6);
@@ -125,6 +125,20 @@
 			return warningColor;
 		} else {
 			return goodColor;
+		}
+	}
+
+	function Validate(name, value) {
+		if (name in ranges) {
+			let range = ranges[name];
+			// if in nominal range
+			if (value >= range[2][0] && value <= range[2][1]) {
+				return goodColor;
+			} else if (value >= range[1][0] && value <= range[1][1]) {
+				return warningColor;
+			} else {
+				return errorColor;
+			}
 		}
 	}
 
@@ -183,11 +197,11 @@
 					<div class="flex flex-row justify-between pb-2">
 						<p class=" text-black">
 							{key}
-							<span class="text-green-500"> {astro[key]} </span>
+							<span class="{Validate(key, astro[key])}"> {astro[key]} </span>
 						</p>
 						<Chart 
 							fullRange={ranges[key][0]}
-							warningRange={ranges[key][1]}
+							warnRange={ranges[key][1]}
 							nominalRange={ranges[key][2]}
 							value={astro[key]}
 						/>
