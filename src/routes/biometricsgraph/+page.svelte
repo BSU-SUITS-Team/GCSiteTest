@@ -40,6 +40,35 @@
 			fanSpeed: 94
 		}
 	];
+	
+	// total range, warning range, nominal range
+	let ranges = {
+		oxygen: [
+			100,
+			[25, 100],
+			[75, 100]
+		],
+		battery: [
+			24,
+			[10, 24],
+			[20, 24]
+		],
+		co2: [
+			10000,
+			[0, 1000],
+			[50, 500]
+		],
+		heartRate: [
+			200,
+			[50, 160],
+			[60, 100]
+		],
+		temperature: [
+			200,
+			[95, 100],
+			[97, 99]
+		]
+	};
 
 	const errorColor = 'p-2 text-align-left rounded-md bg-red-600 text-red-950';
 	const warningColor = 'p-2 text-align-left rounded-md bg-orange-500 text-orange-950';
@@ -149,13 +178,6 @@
 					<ExclamationCircleOutline class="w-5 h-5 ml-1 mt-2 text-orange-500" />
 				</div>
 			</div>
-			<!-- <div class="flex flex-row justify-between pb-2">
-				<p class=" text-black">
-					Oxygen
-					<span class="text-green-500"> 52% </span>
-				</p>
-				<Chart />
-			</div> -->
 			{#each Object.keys(astro) as key}
 				{#if key != 'name' && key != 'location' && key != 'fanSpeed'}
 					<div class="flex flex-row justify-between pb-2">
@@ -163,7 +185,12 @@
 							{key}
 							<span class="text-green-500"> {astro[key]} </span>
 						</p>
-						<Chart />
+						<Chart 
+							fullRange={ranges[key][0]}
+							warningRange={ranges[key][1]}
+							nominalRange={ranges[key][2]}
+							value={astro[key]}
+						/>
 					</div>
 				{/if}
 			{/each}
