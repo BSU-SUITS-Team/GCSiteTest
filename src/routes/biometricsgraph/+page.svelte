@@ -38,9 +38,29 @@
 			temperature: 4,
 			location: 'Mars',
 			fanSpeed: 94
+		},		
+		{
+			name: 'Bob Doe',
+			oxygen: 90,
+			battery: 21,
+			co2: 178,
+			heartRate: 100,
+			temperature: 98,
+			location: 'Mars',
+			fanSpeed: 94
+		},
+		{
+			name: 'Other',
+			oxygen: 90,
+			battery: 21,
+			co2: 178,
+			heartRate: 100,
+			temperature: 98,
+			location: 'Mars',
+			fanSpeed: 94
 		}
 	];
-	
+
 	// total range, warning range, nominal range
 	let ranges = {
 		oxygen: [
@@ -61,13 +81,21 @@
 		heartRate: [
 			[30, 200],
 			[50, 160],
-			[60, 100]
+			[60, 130]
 		],
 		temperature: [
-			[80, 120],
+			[90, 110],
 			[95, 100],
 			[97, 99]
 		]
+	};
+
+	let units = {
+		oxygen: '%',
+		battery: 'V',
+		co2: 'ppm',
+		heartRate: 'bpm',
+		temperature: '°F'
 	};
 
 	const errorColor = 'text-red-500 font-bold';
@@ -175,9 +203,9 @@
 	}
 </script>
 
-<div class="h-full mr-24 overflow-auto">
+<div class=" mr-24 overflow-auto flex flex-row flex-wrap">
 	{#each astronauts as astro}
-		<Card class="mb-2">
+		<Card class="m-2 grow">
 			<div class="flex justify-between flex-row border-b mb-2 pb-2">
 				<div>
 					<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
@@ -188,18 +216,21 @@
 				<div
 					class="flex items-top px-2.5 py-0.5 text-base font-semibold text-red-500 dark:text-red-500 text-center"
 				>
-					<CheckCircleOutline class="w-5 h-5 ml-1 mt-2 text-green-500" />
-					<ExclamationCircleOutline class="w-5 h-5 ml-1 mt-2 text-orange-500" />
+					{#if GetWorst(astro) == errorColor}
+						<ExclamationCircleOutline class="w-5 h-5 ml-1 mt-2 text-orange-500" />
+					{:else}
+						<CheckCircleOutline class="w-5 h-5 ml-1 mt-2 text-green-500" />
+					{/if}
 				</div>
 			</div>
 			{#each Object.keys(astro) as key}
 				{#if key != 'name' && key != 'location' && key != 'fanSpeed'}
 					<div class="flex flex-row justify-between pb-2">
-						<p class=" text-black">
+						<p class=" text-black dark:text-gray-300">
 							{key}
-							<span class="{Validate(key, astro[key])}"> {astro[key]} </span>
+							<span class={Validate(key, astro[key])}> {astro[key]}{units[key]}</span>
 						</p>
-						<Chart 
+						<Chart
 							fullRange={ranges[key][0]}
 							warnRange={ranges[key][1]}
 							nominalRange={ranges[key][2]}
