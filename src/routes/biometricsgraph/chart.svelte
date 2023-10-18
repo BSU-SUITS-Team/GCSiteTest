@@ -17,14 +17,12 @@
 	]);
 	let nominalStart = scaleValue(nominalRange[0], fullRange);
 
-	let position = Math.min(Math.max(scaleValue(value, fullRange), 0), 10);
-
-	console.log(warnWidth);
+	let position = Math.min(Math.max(scaleValue(value, fullRange), .1), 9.9);
 </script>
 
-<div class="w-40 h-6 bg-red-600 rounded-lg relative shadow-lg">
+<div class="w-40 h-6 bg-red-600 rounded-lg relative shadow-lg overflow-clip">
 	<div
-		class="h-6 bg-orange-500 rounded-lg absolute shadow-lg"
+		class="h-6 bg-orange-500 absolute shadow-lg rounded-lg"
 		style="width: {warnWidth}rem; left: {warnStart}rem;"
 	/>
 	<div
