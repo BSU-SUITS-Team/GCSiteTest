@@ -2,12 +2,43 @@
 	import '../app.postcss';
 	import Sidebar from './Sidebar.svelte';
 	import { spring } from 'svelte/motion';
-	import { graphdata, keepables } from './store.js';
-	import { Heading, DarkMode, Button, Span } from 'flowbite-svelte';
-	import { TrashBinOutline, FileEditSolid } from 'flowbite-svelte-icons';
+	import { slide } from 'svelte/transition';
+	import { graphdata, keepables, notifications } from './store.js';
+	import { Heading, DarkMode, Button, Span, Toast } from 'flowbite-svelte';
+	import {
+		TrashBinOutline,
+		FileEditSolid,
+		CheckCircleSolid,
+		ExclamationCircleOutline,
+
+		CheckCircleOutline,
+
+		AnnotationOutline,
+
+		LightbulbOutline
+
+
+
+	} from 'flowbite-svelte-icons';
 	import Graph from './graph.svelte';
 	import TinyGraph from './TinyGraph.svelte';
 
+	let hasNotification = false;
+	let notificationText = 'Oxygen Tank Has Exploaded';
+
+	function notify(text) {
+		notificationList.push(text);
+		notificationText = text;
+		hasNotification = true;
+		setTimeout(() => {
+			notificationList.shift();
+			if (notificationList.length > 0) {
+				notificationText = notificationList[0];
+			} else {
+				hasNotification = false;
+			}
+		}, 15000);
+	}
 	$: hasSideBar = Object.keys($keepables).length > 0 || Object.keys($graphdata).length > 0;
 </script>
 
@@ -40,6 +71,26 @@
 		</aside>
 
 		<main class="flex flex-col flex-1 ml-64 overflow-y-auto {hasSideBar ? 'mr-72' : ''} hide-scrollbar">
+			<div class="absolute right-5 top-5 z-50">
+				{#each $notifications as notification}
+					{#if notification["status"] == "error"}
+						<Toast transition={slide} class="mb-2" color="red">
+							<ExclamationCircleOutline slot="icon" class="w-5 h-5" />
+							{notification["name"]}
+						</Toast>
+					{:else if notification["status"] == "warn"}
+						<Toast transition={slide} class="mb-2">
+							<AnnotationOutline slot="icon" class="w-5 h-5" />
+							{notification["name"]}
+						</Toast>
+					{:else if notification["status"] == "info"}
+						<Toast transition={slide} class="mb-2" color="gray">
+							<LightbulbOutline slot="icon" class="w-5 h-5" />
+							{notification["name"]}
+						</Toast>
+					{/if}
+				{/each}
+			</div>
 			<slot />
 		</main>
 
