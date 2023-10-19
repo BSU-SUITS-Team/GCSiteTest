@@ -1,7 +1,6 @@
 <script>
 	import '../app.postcss';
 	import Sidebar from './Sidebar.svelte';
-	import { spring } from 'svelte/motion';
 	import { slide } from 'svelte/transition';
 	import { graphdata, keepables, notifications } from './store.js';
 	import { Heading, DarkMode, Button, Span, Toast } from 'flowbite-svelte';
@@ -10,17 +9,10 @@
 		FileEditSolid,
 		CheckCircleSolid,
 		ExclamationCircleOutline,
-
 		CheckCircleOutline,
-
 		AnnotationOutline,
-
 		LightbulbOutline
-
-
-
 	} from 'flowbite-svelte-icons';
-	import Graph from './graph.svelte';
 	import TinyGraph from './TinyGraph.svelte';
 
 	let hasNotification = false;
@@ -39,11 +31,14 @@
 			}
 		}, 15000);
 	}
+
 	$: hasSideBar = Object.keys($keepables).length > 0 || Object.keys($graphdata).length > 0;
 </script>
 
 <div class="flex flex-col h-screen">
-	<div class="h-16 border-b p-4 flex flex-row justify-between dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300">
+	<div
+		class="h-16 border-b p-4 flex flex-row justify-between dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
+	>
 		<div class="flex flex-row">
 			<p class="text-xl pr-12">Oxygen: <Span highlight>96 Minuties</Span></p>
 			<p class="text-xl">32 Minuties Elapsed</p>
@@ -70,23 +65,25 @@
 			</div>
 		</aside>
 
-		<main class="flex flex-col flex-1 ml-64 overflow-y-auto {hasSideBar ? 'mr-72' : ''} hide-scrollbar">
+		<main
+			class="flex flex-col flex-1 ml-64 overflow-y-auto {hasSideBar ? 'mr-72' : ''} hide-scrollbar"
+		>
 			<div class="absolute right-5 top-16 pt-1 z-50">
 				{#each $notifications as notification}
-					{#if notification["status"] == "error"}
+					{#if notification['status'] == 'error'}
 						<Toast transition={slide} class="mb-2" color="red">
 							<ExclamationCircleOutline slot="icon" class="w-5 h-5" />
-							{notification["name"]}
+							{notification['name']}
 						</Toast>
-					{:else if notification["status"] == "warn"}
+					{:else if notification['status'] == 'warn'}
 						<Toast transition={slide} class="mb-2">
 							<AnnotationOutline slot="icon" class="w-5 h-5" />
-							{notification["name"]}
+							{notification['name']}
 						</Toast>
-					{:else if notification["status"] == "info"}
+					{:else if notification['status'] == 'info'}
 						<Toast transition={slide} class="mb-2" color="gray">
 							<LightbulbOutline slot="icon" class="w-5 h-5" />
-							{notification["name"]}
+							{notification['name']}
 						</Toast>
 					{/if}
 				{/each}
