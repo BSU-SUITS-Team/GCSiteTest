@@ -19,6 +19,7 @@
 	export let maxScale = 10;
 	export let xRange = [0, 9999999];
 	export let yRange = [0, 9999999];
+	export let initalPosition = [0, 0];
 
 	function handleWheel(event) {
 		const delta = event.deltaY < 0 ? 1.1 : 0.9;
@@ -83,6 +84,8 @@
 
 	onMount(() => {
 		scale = initalSize;
+		offsetX = initalPosition[0];
+		offsetY = initalPosition[1];
 	});
 </script>
 
