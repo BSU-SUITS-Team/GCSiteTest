@@ -1,6 +1,14 @@
 <script>
 	import { page } from '$app/stores';
-	import { Sidebar, SidebarGroup, SidebarItem, SidebarBrand, SidebarWrapper, SidebarDropdownItem, SidebarDropdownWrapper } from 'flowbite-svelte';
+	import {
+		Sidebar,
+		SidebarGroup,
+		SidebarItem,
+		SidebarBrand,
+		SidebarWrapper,
+		SidebarDropdownItem,
+		SidebarDropdownWrapper
+	} from 'flowbite-svelte';
 	import {
 		ChartPieSolid,
 		GridSolid,
@@ -8,10 +16,11 @@
 		UserSolid,
 		ArrowRightToBracketSolid,
 		FileEditSolid,
-        MapPinAltSolid,
-        UserGroupSolid,
-        ExclamationCircleSolid,
-        QuestionCircleSolid
+		MapPinAltSolid,
+		UserGroupSolid,
+		ExclamationCircleSolid,
+		QuestionCircleSolid,
+		BookSolid
 	} from 'flowbite-svelte-icons';
 	let spanClass = 'flex-1 ml-3 whitespace-nowrap';
 	$: activeUrl = $page.url.pathname;
@@ -27,14 +36,33 @@
 					/>
 				</svelte:fragment>
 			</SidebarItem>
-            <SidebarDropdownWrapper label="Entities" isOpen=true>
-                <svelte:fragment slot="icon">
-                  <UserGroupSolid class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                </svelte:fragment>
-                <SidebarDropdownItem label="Rover" href="/rover" active={activeUrl == "/rover"}>
-                </SidebarDropdownItem>
-                <SidebarDropdownItem label="Astroanut" href="/astronaut" active={activeUrl == "/astronaut"}/>
-            </SidebarDropdownWrapper>
+			<SidebarDropdownWrapper label="Entities" isOpen="true">
+				<svelte:fragment slot="icon">
+					<UserGroupSolid
+						class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+					/>
+				</svelte:fragment>
+				<SidebarDropdownItem label="Rover" href="/rover" active={activeUrl == '/rover'} />
+				<SidebarDropdownItem
+					label="Astroanut"
+					href="/astronaut"
+					active={activeUrl == '/astronaut'}
+				/>
+			</SidebarDropdownWrapper>
+			<SidebarItem label="Map" href="/map">
+				<svelte:fragment slot="icon">
+					<MapPinAltSolid
+						class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+					/>
+				</svelte:fragment>
+			</SidebarItem>
+			<SidebarItem label="Procedures" href="/procedures" active={activeUrl == '/procedures'}>
+				<svelte:fragment slot="icon">
+					<BookSolid
+						class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+					/>
+				</svelte:fragment>
+			</SidebarItem>
 			<SidebarItem label="Events" {spanClass}>
 				<svelte:fragment slot="icon">
 					<ExclamationCircleSolid
@@ -47,20 +75,6 @@
 					>
 						3
 					</span>
-				</svelte:fragment>
-			</SidebarItem>
-            <!-- <SidebarItem label="Other ...">
-				<svelte:fragment slot="icon">
-					<QuestionCircleSolid
-						class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-					/>
-				</svelte:fragment>
-			</SidebarItem> -->
-			<SidebarItem label="Map" href="/map">
-				<svelte:fragment slot="icon">
-					<MapPinAltSolid
-						class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-					/>
 				</svelte:fragment>
 			</SidebarItem>
 		</SidebarGroup>

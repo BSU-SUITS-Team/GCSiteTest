@@ -2,6 +2,7 @@
 	import { Heading, Span, Button } from 'flowbite-svelte';
 	import Graph from '../graph.svelte';
 	import { keepables, graphdata } from '../store';
+	import EmptyVideo from '../EmptyVideo.svelte';
 
 	let data = [
 		['Battery:', '72%'],
@@ -72,6 +73,15 @@
 	<Button color="dark">Show Path</Button>
 	<Button color="dark">Return</Button>
 	<Button color="dark">Show Window</Button>
+	<br />
+	<br />
+	<Heading tag="h3">Cameras</Heading>
+	<br />
+	<div class="flex flex-row">
+		<div class="p-2">
+			<EmptyVideo name="Hololens"/>
+		</div>
+	</div>
 	<br />
 	<br />
 	<Heading tag="h3">Details</Heading>
