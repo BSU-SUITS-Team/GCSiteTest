@@ -11,18 +11,21 @@
 	$: hasSideBar = Object.keys($keepables).length > 0 || Object.keys($graphdata).length > 0;
 </script>
 
-<div class="flex flex-col">
-	<div class="h-16 border-b p-4 flex flex-row justify-between">
+<div class="flex flex-col h-screen">
+	<div class="h-16 border-b p-4 flex flex-row justify-between dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300">
 		<div class="flex flex-row">
-			<p class="text-xl pr-12">Oxygen: <Span highlight>96 Minuties</Span></p>			
+			<p class="text-xl pr-12">Oxygen: <Span highlight>96 Minuties</Span></p>
 			<p class="text-xl">32 Minuties Elapsed</p>
 		</div>
-		<p class="text-xl">Other Important Text That Is Longer and Sort of Just Sits at the Top Providing Status</p>
+		<p class="text-xl">
+			Other Important Text That Is Longer and Sort of Just Sits at the Top Providing Status
+		</p>
 	</div>
-	<div class="app h-screen dark:bg-gray-900 flex overflow-hidden">
+	<div class="dark:bg-gray-900 flex overflow-hidden h-full">
 		<aside
-			class="absolute flex-grow-0 flex-shrink-0 w-fit h-full
+			class="absolute flex-grow-0 flex-shrink-0 w-fit
 					flex-col justify-between flex dark:bg-gray-800 border-r dark:border-gray-700"
+			style="height: calc(100vh - 4rem);"
 		>
 			<span class="p-8 text-center">
 				<Heading tag="h1">ARSIS</Heading>
@@ -35,30 +38,31 @@
 				<DarkMode />
 			</div>
 		</aside>
-	
-		<main class="flex flex-col flex-1 ml-64 overflow-y-auto {hasSideBar ? 'mr-72' : ''}">
+
+		<main class="flex flex-col flex-1 ml-64 overflow-y-auto {hasSideBar ? 'mr-72' : ''} hide-scrollbar">
 			<slot />
 		</main>
+
 		{#if hasSideBar}
 			<div
-			class="absolute right-0 h-full p-8 bg-white dark:bg-gray-900 overflow-y-auto"
-			style="width: 22rem;"
-		>
+				class="absolute right-0 p-5 bg-white dark:bg-gray-900 overflow-y-auto h-full"
+				style="width: 18rem; height: calc(100vh - 4rem);"
+			>
 				{#each new Set([...Object.keys($keepables), ...Object.keys($graphdata)]) as label}
 					<div class="border-b flex-row flex pb-2 mb-1 dark:border-gray-700">
 						<Heading tag="h4">{label}</Heading>
 						<FileEditSolid class="dark:text-gray-400 mr-2 h-7 text-gray-800" href="/rover" />
 						<TrashBinOutline class="dark:text-gray-400 h-7 text-gray-800" />
 					</div>
-	
+
 					{#if $keepables[label]}
 						<div class="flex justify-left pr-2 pl-2 flex-wrap">
 							{#each $keepables[label] as item}
 								<div class="p-1">
 									<Button
-									color="alternative"
-									on:click={() => keepables.removeElement(label, item[0])}
-								>
+										color="alternative"
+										on:click={() => keepables.removeElement(label, item[0])}
+									>
 										{item[0]}&nbsp
 										<Span highlight>{item[1]}</Span>
 									</Button>
@@ -66,7 +70,6 @@
 							{/each}
 						</div>
 					{/if}
-	
 					{#if $graphdata[label]}
 						{#each Object.keys($graphdata[label]) as graph}
 							<div
@@ -87,5 +90,25 @@
 				{/each}
 			</div>
 		{/if}
-</div>	
+	</div>
 </div>
+
+<style>
+	/* Utilities for hiding scrollbars */
+
+	/* For Chrome, Safari, and newer versions of Opera */
+	.hide-scrollbar::-webkit-scrollbar {
+		width: 0; /* For vertical scrollbars */
+		height: 0; /* For horizontal scrollbars */
+	}
+
+	/* For Firefox */
+	.hide-scrollbar {
+		scrollbar-width: none;
+	}
+
+	/* For Internet Explorer and Edge */
+	.hide-scrollbar {
+		-ms-overflow-style: none;
+	}
+</style>

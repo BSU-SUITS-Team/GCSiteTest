@@ -113,7 +113,7 @@
 		</div>
 	{/each}
 
-	<div class="absolute z-10 top-5 w-full">
+	<div class="absolute z-10 top-5 w-full h-full">
 		<div class="flex justify-center">
 			<div class="mb-4 p-2 shadow-xl rounded-lg flex flex-row bg-white w-fit dark:bg-gray-800">
 				<BoxButton color="red" />
