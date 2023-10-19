@@ -9,7 +9,7 @@
 	import TinyGraph from './TinyGraph.svelte';
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col h-screen">
 	<div class="h-16 border-b p-4 flex flex-row justify-between">
 		<div class="flex flex-row">
 			<p class="text-xl pr-12">Oxygen: <Span highlight>96 Minuties</Span></p>			
@@ -17,10 +17,11 @@
 		</div>
 		<p class="text-xl">Other Important Text That Is Longer and Sort of Just Sits at the Top Providing Status</p>
 	</div>
-	<div class="app h-screen dark:bg-gray-900 flex overflow-hidden">
+	<div class="dark:bg-gray-900 flex overflow-hidden">
 		<aside
-			class="absolute flex-grow-0 flex-shrink-0 w-fit h-full
+			class="absolute flex-grow-0 flex-shrink-0 w-fit
 					flex-col justify-between flex dark:bg-gray-800 border-r dark:border-gray-700"
+				style="height: calc(100vh - 4rem);"
 		>
 			<span class="p-8 text-center">
 				<Heading tag="h1">ARSIS</Heading>
@@ -38,7 +39,7 @@
 			<slot />
 		</main>
 	
-		<div class="absolute right-0 h-full p-8 bg-white dark:bg-gray-900 overflow-y-auto" style="width: 22rem;">
+		<div class="absolute right-0 p-8 bg-white dark:bg-gray-900 overflow-y-auto h-full" style="width: 22rem; height: calc(100vh - 4rem);">
 			{#each new Set([...Object.keys($keepables), ...Object.keys($graphdata)]) as label}
 				<div class="border-b flex-row flex pb-2 mb-1 dark:border-gray-700">
 					<Heading tag="h4">{label}</Heading>
