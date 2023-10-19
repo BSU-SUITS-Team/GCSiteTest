@@ -23,7 +23,7 @@
 
 <section>
 	<div class="justify-center pr-72 mb-5">
-		<Heading tag="h2">Utils for Notifications</Heading>
+		<Heading tag="h2">TMP Utils for Notifications</Heading>
 	</div>
 	<div class="justify-center pr-72 mb-2">
 		<Button color="alternative" on:click={doProblem}>Show Error</Button>
