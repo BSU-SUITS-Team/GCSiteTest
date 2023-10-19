@@ -71,7 +71,7 @@
 		</aside>
 
 		<main class="flex flex-col flex-1 ml-64 overflow-y-auto {hasSideBar ? 'mr-72' : ''} hide-scrollbar">
-			<div class="absolute right-5 top-5 z-50">
+			<div class="absolute right-5 top-16 pt-1 z-50">
 				{#each $notifications as notification}
 					{#if notification["status"] == "error"}
 						<Toast transition={slide} class="mb-2" color="red">
