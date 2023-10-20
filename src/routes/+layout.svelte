@@ -37,13 +37,13 @@
 
 <div class="flex flex-col h-screen">
 	<div
-		class="h-16 border-b p-4 flex flex-row justify-between dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
+		class="h-16 border-b p-4 flex flex-row justify-between dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 text-lg"
 	>
 		<div class="flex flex-row">
-			<p class="text-xl pr-12">Oxygen: <Span highlight>96 Minuties</Span></p>
-			<p class="text-xl">32 Minuties Elapsed</p>
+			<p class="pr-12">Oxygen: <span class="text-blue-600 font-bold">96 Minuties<span></p>
+			<p>32 Minuties Elapsed</p>
 		</div>
-		<p class="text-xl">
+		<p>
 			Other Important Text That Is Longer and Sort of Just Sits at the Top Providing Status
 		</p>
 	</div>
