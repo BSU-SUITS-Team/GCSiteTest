@@ -93,7 +93,7 @@
 
 		{#if hasSideBar}
 			<div
-				class="absolute right-0 p-5 bg-white dark:bg-gray-900 overflow-y-auto h-full"
+				class="absolute right-0 p-5 bg-white dark:bg-gray-900 overflow-y-auto h-full border-l"
 				style="width: 18rem; height: calc(100vh - 4rem);"
 			>
 				{#each new Set([...Object.keys($keepables), ...Object.keys($graphdata)]) as label}

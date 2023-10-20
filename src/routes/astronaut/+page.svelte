@@ -41,9 +41,9 @@
 	];
 </script>
 
-<div class="w-fit h-fit m-4">
+<div class="h-fit m-4">
 	<br />
-	<div class="border-b p-2 dark:border-gray-700">
+	<div class="border-b p-2  dark:border-gray-700">
 		<Heading tag="h1">ASTRONAUT</Heading>
 	</div>
 	<br />
