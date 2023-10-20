@@ -1,5 +1,5 @@
 <script>
-	import { Heading, Span, Button } from 'flowbite-svelte';
+	import { Heading, Span, Button, Card, Table, TableBody, TableBodyRow, TableBodyCell } from 'flowbite-svelte';
 	import Graph from '../graph.svelte';
 	import { keepables, graphdata } from '../store';
 	import EmptyVideo from '../EmptyVideo.svelte';
@@ -46,34 +46,70 @@
 	<div class="border-b p-2  dark:border-gray-700">
 		<Heading tag="h1">ASTRONAUT</Heading>
 	</div>
-	<br />
-	<Heading tag="h3">Stats</Heading>
-	<br />
 	<!-- <Button color="alternative">Battery 1: &nbsp <Span highlight>72%</Span></Button>
     <Button color="alternative">Battery 2: &nbsp <Span highlight>76%</Span></Button>
     <Button color="alternative">Location: &nbsp (<Span highlight>31.9686</Span>,<Span highlight>99.9018</Span>)</Button> -->
-	<div style="width: 40rem;">
-		{#each data as item}
-			<Button
-				color="alternative"
-				on:click={() => keepables.addElement('ASTRONAUT', item)}
-				class="m-1"
-			>
-				{item[0]} &nbsp
-				<Span highlight>{item[1]}</Span>
-			</Button>
-		{/each}
+	<div class="flex flex-row p-2 justify-start">
+		<div class="flex flex-col min-w-0">
+			<Heading tag="h3" class="pb-2">Stats</Heading>
+			<div class="flex-row">
+				{#each data as item}
+					<Button color="alternative" on:click={() => keepables.addElement('ROVER', item)} class="m-1">
+						{item[0]} &nbsp
+						<Span highlight>{item[1]}</Span>
+					</Button>
+				{/each}
+			</div>
+			<br />
+			<Heading tag="h3"  class="pb-2">Actions</Heading>
+			<div class="flex-row">
+				<Button class="m-0.5" color="dark">Collect Sample</Button>
+				<Button class="m-0.5" color="dark">Drop Sample</Button>
+				<Button class="m-0.5" color="dark">Take Picture</Button>
+				<Button class="m-0.5" color="dark">Return</Button>
+				<Button class="m-0.5">Self Destruct</Button>
+			</div>
+		</div>
+		<div class="flex p-1 flex-grow ml-4 mr-16">
+			<Card class="w-96">
+				<Heading tag="h3" class="mb-5">Quick Access</Heading>
+				<Table>
+					<TableBody class="divide-y">
+					  <TableBodyRow>
+						<TableBodyCell>Open Biometrics</TableBodyCell>
+						<TableBodyCell>
+						  <a href="/tables" class="font-medium text-red-600 hover:underline dark:text-primary-500">Remove</a>
+						</TableBodyCell>
+					  </TableBodyRow>
+					  <TableBodyRow>
+						<TableBodyCell>Open Map</TableBodyCell>
+						<TableBodyCell>
+						  <a href="/tables" class="font-medium text-red-600 hover:underline dark:text-primary-500">Remove</a>
+						</TableBodyCell>
+					  </TableBodyRow>
+					  <TableBodyRow>
+						<TableBodyCell>Ingress Procedure</TableBodyCell>
+						<TableBodyCell>
+						  <a href="/tables" class="font-medium text-red-600 hover:underline dark:text-primary-500">Remove</a>
+						</TableBodyCell>
+					  </TableBodyRow>
+					  <TableBodyRow>
+						<TableBodyCell>Repair Procedure</TableBodyCell>
+						<TableBodyCell>
+						  <a href="/tables" class="font-medium text-red-600 hover:underline dark:text-primary-500">Remove</a>
+						</TableBodyCell>
+					  </TableBodyRow>
+					  <TableBodyRow>
+						<TableBodyCell>Move Rover</TableBodyCell>
+						<TableBodyCell>
+						  <a href="/tables" class="font-medium text-red-600 hover:underline dark:text-primary-500">Remove</a>
+						</TableBodyCell>
+					  </TableBodyRow>
+					</TableBody>
+				  </Table>
+			</Card>
+		</div>
 	</div>
-	<br />
-	<br />
-	<Heading tag="h3">Actions</Heading>
-	<br />
-	<Button color="dark">Add Procedure</Button>
-	<Button color="dark">Take Picture</Button>
-	<Button color="dark">Show Path</Button>
-	<Button color="dark">Return</Button>
-	<Button color="dark">Show Window</Button>
-	<br />
 	<br />
 	<Heading tag="h3">Cameras</Heading>
 	<br />
