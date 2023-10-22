@@ -1,79 +1,95 @@
 <script>
-    import { Chart, Card, A, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
-    import { ChevronRightSolid, ChevronDownSolid, ChevronUpSolid } from 'flowbite-svelte-icons';
+  import { Chart, Card, A, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
+  import { ChevronRightSolid, ChevronDownSolid, ChevronUpSolid } from 'flowbite-svelte-icons';
 
-    export let name = 'Power Level';
-    export let status = '12.1V';
-    export let lastDelta = '12%';
-    export let graphdata = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
-  
-    let options = {
-      chart: {
-        height: '100%',
-        maxWidth: '100%',
-        type: 'area',
-        fontFamily: 'Inter, sans-serif',
-        dropShadow: {
-          enabled: false
-        },
-        toolbar: {
-          show: false
-        }
-      },
-      tooltip: {
-        enabled: false,
-        x: {
-          show: false
-        }
-      },
-      fill: {
-        type: 'gradient',
-        gradient: {
-          opacityFrom: 0.55,
-          opacityTo: 0,
-          shade: '#1C64F2',
-          gradientToColors: ['#1C64F2']
-        }
-      },
-      dataLabels: {
+  export let name = 'Power Level';
+  export let status = '12.1V';
+  export let lastDelta = '12%';
+  export let graphdata = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
+  export let graphseries = [
+    {
+      name: 'Battery 1',
+      data: graphdata,
+      color: '#FF0000',
+    }
+  ];
+  export let graphcolor = '#1A56DB';
+  export let ymin = 8;
+  export let ymax = 15;
+
+
+  let options = {
+    chart: {
+      height: '100%',
+      maxWidth: '100%',
+      type: 'rangeArea',
+      fontFamily: 'Inter, sans-serif',
+      dropShadow: {
         enabled: false
       },
-      stroke: {
-        width: 6
-      },
-      grid: {
-        show: true,
-        strokeDashArray: 4,
-        padding: {
-          left: 2,
-          right: 2,
-          top: 0
-        }
-      },
-      series: [
-        {
-          name: 'Battery 1',
-          data: graphdata,
-          color: '#1A56DB'
-        }
-      ],
-      xaxis: {
-        labels: {
-          show: false
-        },
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        }
-      },
-      yaxis: {
+      toolbar: {
         show: false
       }
-    };
+    },
+    tooltip: {
+      enabled: false,
+      x: {
+        show: false
+      }
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        opacityFrom: 0.5,
+        opacityTo: 0.5,
+        shade: graphseries.color,
+        gradientToColors: [graphseries.color]
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      width: 6
+    },
+    grid: {
+      show: true,
+      strokeDashArray: 4,
+      padding: {
+        left: 2,
+        right: 2,
+        top: 0
+      }
+    },
+    series: graphseries,
+    xaxis: {
+      labels: {
+        show: false
+      },
+      axisBorder: {
+        show: false
+      },
+      axisTicks: {
+        show: false
+      }
+    },
+    yaxis: {
+      show: true,
+      labels: {
+        align: 'left',
+        offsetX: -10,
+      },
+      min: ymin,
+      max: ymax,
+    },
+    colors: [graphcolor],
+    legend: {
+      show: false,
+      customLegendItems: [name],
+    },
+  };
   </script>
-  
+
   <Card>
     <div class="flex justify-between">
       <div>
