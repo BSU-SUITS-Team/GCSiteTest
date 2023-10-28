@@ -7,113 +7,37 @@
 		TableHeadCell,
 		TableBody,
 		TableBodyRow,
-		TableBodyCell
+		TableBodyCell,
+
+		Table
+
 	} from 'flowbite-svelte';
 
 	let astronauts = [
 		{
-			name: 'John Doe',
+			name: 'EV-1',
 			oxygen: 99,
-			battery: 100,
+			battery: 14,
 			co2: 178,
-			heartRate: 0,
-			temperature: 99,
+			heartRate: 90,
+			temperature: 98,
 			location: 'Mars',
 			fanSpeed: 68
 		},
 		{
-			name: 'Jane Doe',
+			name: 'EV-2',
 			oxygen: 70,
 			battery: 100,
 			co2: 178,
 			heartRate: 100,
-			temperature: 4,
-			location: 'Mars',
-			fanSpeed: 94
-		},
-		{
-			name: 'John Doe',
-			oxygen: 30,
-			battery: 100,
-			co2: 178,
-			heartRate: 110,
-			temperature: 98,
-			location: 'Mars',
-			fanSpeed: 77
-		},
-		{
-			name: 'Jane Doe',
-			oxygen: 12,
-			battery: 100,
-			co2: 570,
-			heartRate: 140,
-			temperature: 99,
-			location: 'Mars',
-			fanSpeed: 74
-		},
-		{
-			name: 'John Doe',
-			oxygen: 100,
-			battery: 99,
-			co2: 2170,
-			heartRate: 124,
-			temperature: 0,
-			location: 'Mars',
-			fanSpeed: 63
-		},
-		{
-			name: 'Jane Doe',
-			oxygen: 100,
-			battery: 100,
-			co2: 178,
-			heartRate: 255,
 			temperature: 100,
 			location: 'Mars',
-			fanSpeed: 69
-		},
-		{
-			name: 'John Doe',
-			oxygen: 100,
-			battery: 99,
-			co2: 179,
-			heartRate: 99,
-			temperature: 98,
-			location: 'Mars',
-			fanSpeed: 79
-		},
-		{
-			name: 'Jane Doe',
-			oxygen: 100,
-			battery: 30,
-			co2: 178,
-			heartRate: 100,
-			temperature: 99,
-			location: 'Mars',
-			fanSpeed: 71
-		},
-		{
-			name: 'John Doe',
-			oxygen: 100,
-			battery: 0,
-			co2: 300,
-			heartRate: 99,
-			temperature: 99,
-			location: 'Mars',
-			fanSpeed: 51
-		},
-		{
-			name: 'Jane Doe',
-			oxygen: 99,
-			battery: 99,
-			co2: 245,
-			heartRate: 100,
-			temperature: 98,
-			fanSpeed: 91
+			fanSpeed: 94
 		}
 	];
 
-	const errorColor = 'p-2 text-align-left rounded-md bg-red-600 text-red-950';
-	const warningColor = 'p-2 text-align-left rounded-md bg-orange-500 text-orange-950';
+	const errorColor = 'p-2 text-align-left rounded-md text-red-500';
+	const warningColor = 'p-2 text-align-left rounded-md text-orange-400';
 	const goodColor = 'p-2 text-align-left rounded-md ';
 
 	function TemperatureValidation(temperature) {
@@ -151,7 +75,7 @@
 	}
 
 	function BatteryValidation(battery) {
-		if (battery < 10) {
+		if (battery < 20) {
 			return errorColor;
 		} else if (battery < 50) {
 			return warningColor;
@@ -219,14 +143,10 @@
 		return worst;
 	}
 
-	let searchTerm = '';
-	$: filteredItems = astronauts.filter((astronaut) =>
-		astronaut.name.toLowerCase().includes(searchTerm.toLowerCase())
-	);
 </script>
 
-<div class="h-full mr-24 overflow-auto">
-	<TableSearch hoverable bind:inputValue={searchTerm}>
+<div class="h-full mr-24 overflow-auto pt-8">
+	<Table hoverable>
 		<TableHead>
 			<TableHeadCell>Name</TableHeadCell>
 			<TableHeadCell>
@@ -246,38 +166,38 @@
 			</TableHeadCell>
 		</TableHead>
 		<TableBody class="divide-y">
-			{#each filteredItems as prcedure}
+			{#each astronauts as astro}
 				<TableBodyRow>
 					<TableBodyCell>
-						<span class={GetWorst(prcedure)}>
-							{prcedure.name}
+						<span>
+							{astro.name}
 						</span>
 					</TableBodyCell>
 					<TableBodyCell >
-						<span class={OxygenValidation(prcedure.oxygen)}>
-							{prcedure.oxygen.toLocaleString()}%
+						<span class={OxygenValidation(astro.oxygen)}>
+							{astro.oxygen.toLocaleString()}%
 						</span>
 					</TableBodyCell>
 					<TableBodyCell >
-						<span class={BatteryValidation(prcedure.battery)}>
-							{prcedure.battery.toLocaleString()}%
+						<span class={BatteryValidation(astro.battery)}>
+							{astro.battery.toLocaleString()}%
 						</span>
 					</TableBodyCell>
 					<TableBodyCell >
-						<span class={CO2Validation(prcedure.co2)}>{prcedure.co2.toLocaleString()} PPM</span>
+						<span class={CO2Validation(astro.co2)}>{astro.co2.toLocaleString()} PPM</span>
 					</TableBodyCell>
 					<TableBodyCell >
-						<span class={HeartRateValidation(prcedure.heartRate)}>
-							{prcedure.heartRate.toLocaleString()} BPM
+						<span class={HeartRateValidation(astro.heartRate)}>
+							{astro.heartRate.toLocaleString()} BPM
 						</span>
 					</TableBodyCell>
 					<TableBodyCell >
-						<span class={TemperatureValidation(prcedure.temperature)}>
-							{prcedure.temperature.toLocaleString()} &deg;F
+						<span class={TemperatureValidation(astro.temperature)}>
+							{astro.temperature.toLocaleString()} &deg;F
 						</span>
 					</TableBodyCell>
 				</TableBodyRow>
 			{/each}
 		</TableBody>
-	</TableSearch>
+	</Table>
 </div>
