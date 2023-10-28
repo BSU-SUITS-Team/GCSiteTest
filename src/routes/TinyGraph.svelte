@@ -4,7 +4,6 @@
 
 	export let name = 'Power Level';
 	export let status = '12.1V';
-	export let lastDelta = '12%';
 	export let graphdata = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
 
 	let options = {
